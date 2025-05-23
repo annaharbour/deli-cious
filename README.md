@@ -10,13 +10,13 @@ classDiagram
         +boolean isExtra()
     }
 
-    class OrderableItem {
+    class MenuItem {
         <<interface>>
         +double getPrice()
         +String getReceiptLine()
     }
 
-    class Menu {
+    class Screen {
         <<interface>>
         +void run()
     }
@@ -28,7 +28,7 @@ classDiagram
 
     %% Concrete Classes
     class Sandwich {
-        -SelectedSize size
+        -Size size
         -BreadType bread
         -boolean toasted
         -List~Topping~ toppings
@@ -54,11 +54,11 @@ classDiagram
         +double getPrice()
     }
 
-    class IncludedTopping {
+    class RegularTopping {
         -ToppingType type
     }
 
-    class Chip {
+    class Chips {
         -ChipType type
         +double getPrice()
         +String getReceiptLine()
@@ -72,7 +72,7 @@ classDiagram
     }
 
     class Order {
-        -List~OrderableItem~ items
+        -List~MenuItem~ orderItems
         +addItem(OrderableItem)
         +double getTotalPrice()
         +String generateReceipt()
@@ -82,12 +82,14 @@ classDiagram
         +void write(Order order)
     }
 
-    %% Menu Classes
-    class HomeMenu
-    class OrderMenu
-    class AddSandwichMenu
-    class AddDrinkMenu
-    class CheckoutMenu
+    %% Screen Classes
+    class HomeScreen
+    class OrderScreen
+    class AddSandwichScreen
+    class SignatureSandwichesScreen
+    class AddChipsScreen
+    class AddDrinkScreen
+    class CheckoutScreen
 
     %% Relationships
     Topping <|.. PremiumTopping
@@ -102,11 +104,11 @@ classDiagram
     Sandwich o-- Topping
     Order o-- OrderableItem
 
-    Menu <|.. HomeMenu
-    Menu <|.. OrderMenu
-    Menu <|.. AddSandwichMenu
-    Menu <|.. AddDrinkMenu
-    Menu <|.. CheckoutMenu
+    Screen <|.. HomeScreen
+    Screen <|.. OrderScreen
+    Screen <|.. AddSandwichScreen
+    Screen <|.. AddDrinkScreen
+    Screen <|.. CheckoutScreen
 
     ReceiptWriter <|.. FileReceiptWriter
     FileReceiptWriter --> Order
