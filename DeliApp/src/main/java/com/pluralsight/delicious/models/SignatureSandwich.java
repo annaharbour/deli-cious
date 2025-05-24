@@ -5,8 +5,9 @@ import java.util.List;
 public class SignatureSandwich extends Sandwich {
     private String name;
 
-    public SignatureSandwich(Size size, BreadType breadType, SauceType sauceType, List<Topping> toppings, boolean toasted, String name) {
-        super(size, breadType, sauceType, toppings, toasted);
+    public SignatureSandwich(Size size, BreadType breadType, List<Topping> toppings, List<Sauce> sauces,
+                             List<Side> sides, boolean toasted, String name) {
+        super(size, breadType, toppings, toasted);
         this.name = name;
     }
 

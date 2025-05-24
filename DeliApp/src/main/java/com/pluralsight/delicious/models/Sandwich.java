@@ -2,7 +2,7 @@ package com.pluralsight.delicious.models;
 
 import java.util.List;
 
-public class Sandwich {
+public class Sandwich implements MenuItem{
     public enum Size {
         SMALL(4),
         MEDIUM(8),
@@ -25,23 +25,14 @@ public class Sandwich {
         RYE
     }
 
-    public enum SauceType {
-        MAYO,
-        MUSTARD,
-        KETCHUP,
-        BBQ
-    }
-
     private Size size;
     private BreadType breadType;
-    private SauceType sauceType;
     private List<Topping> toppings;
     boolean toasted;
 
-    public Sandwich(Size size, BreadType breadType, SauceType sauceType, List<Topping> toppings, boolean toasted) {
+    public Sandwich(Size size, BreadType breadType, List<Topping> toppings, boolean toasted) {
         this.size = size;
         this.breadType = breadType;
-        this.sauceType = sauceType;
         this.toppings = toppings;
         this.toasted = toasted;
     }
@@ -62,14 +53,6 @@ public class Sandwich {
         this.breadType = breadType;
     }
 
-    public SauceType getSauceType() {
-        return sauceType;
-    }
-
-    public void setSauceType(SauceType sauceType) {
-        this.sauceType = sauceType;
-    }
-
     public List<Topping> getToppings() {
         return toppings;
     }
@@ -85,4 +68,30 @@ public class Sandwich {
     public void setToasted(boolean toasted) {
         this.toasted = toasted;
     }
+
+    @Override
+    public double getPrice() {
+        return 0;
+    }
+
+    @Override
+    public String getReceiptLine() {
+        return "Sandwich{" +
+                "size=" + size +
+                ", breadType=" + breadType +
+                ", toppings=" + toppings +
+                ", toasted=" + toasted +
+                '}';
+    }
+
+    @Override
+    public String getOrderLine() {
+        return "Sandwich{" +
+                "size=" + size +
+                ", breadType=" + breadType +
+                ", toppings=" + toppings +
+                ", toasted=" + toasted +
+                '}';
+    }
+
 }
