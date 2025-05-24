@@ -1,10 +1,8 @@
 package com.pluralsight.delicious.ui;
 
-import com.pluralsight.delicious.models.MeatTopping;
-import com.pluralsight.delicious.models.Order;
-import com.pluralsight.delicious.models.RegularTopping;
-import com.pluralsight.delicious.models.Sandwich;
+import com.pluralsight.delicious.models.*;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class CustomizeSandwichScreen implements ScreenState {
@@ -36,7 +34,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         chooseSauces(scanner, sandwich);
         chooseToasted(scanner, sandwich);
 
-        // Return the next screen or the current screen based on user input
+        // TODO: Return the next screen or the current screen based on user input
         return new OrderScreen();
     }
 
@@ -58,16 +56,54 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Add Veggies");
-        for (RegularTopping.FreeTopping topping : RegularTopping.FreeTopping.values()) {
-            System.out.println(topping);
+        System.out.println("Add veggies:");
+        for (RegularTopping.FreeTopping cheeseTopping : RegularTopping.FreeTopping.values()) {
+            System.out.println(cheeseTopping);
+        }
+        RegularTopping.FreeTopping[] toppingOptions = RegularTopping.FreeTopping.values();
+        int toppingChoice;
+        do {
+            toppingChoice = scanner.nextInt();
+            if (toppingChoice < 1 || toppingChoice > toppingOptions.length) {
+                System.out.println("Invalid choice, please select a valid veg option.");
+            }
+        } while (toppingChoice < 1 || toppingChoice > toppingOptions.length);
+
+        System.out.println("Would you like extra veg?\n\t1) Yes\n\t2) No");
+        int extra = scanner.nextInt();
+        if (extra == 1) {
+            sandwich.addTopping(new RegularTopping(toppingOptions[toppingChoice - 1]));
+        } else if (extra == 2) {
+            sandwich.addTopping(new RegularTopping(toppingOptions[toppingChoice - 1]));
+        } else {
+            System.out.println("Invalid choice, please try again.");
+            chooseMeat(scanner, sandwich);
         }
     }
 
     private static void chooseCheese(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Add cheese");
-        for (RegularTopping.FreeTopping topping : RegularTopping.FreeTopping.values()) {
-            System.out.println(topping);
+        System.out.println("Select a cheese option:");
+        for (CheeseTopping.CheeseType cheeseTopping : CheeseTopping.CheeseType.values()) {
+            System.out.println(cheeseTopping);
+        }
+        CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.CheeseType.values();
+        int cheeseChoice;
+        do {
+            cheeseChoice = scanner.nextInt();
+            if (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length) {
+                System.out.println("Invalid choice, please select a valid cheese option.");
+            }
+        } while (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length);
+
+        System.out.println("Would you like extra cheese?\n\t1) Yes\n\t2) No");
+        int extra = scanner.nextInt();
+        if (extra == 1) {
+            sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], true));
+        } else if (extra == 2) {
+            sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], false));
+        } else {
+            System.out.println("Invalid choice, please try again.");
+            chooseMeat(scanner, sandwich);
         }
     }
 
