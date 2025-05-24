@@ -1,18 +1,28 @@
 package com.pluralsight.delicious.models;
 
 public class MeatTopping extends PremiumTopping {
-    public MeatTopping(MeatType meatType) {
+    public MeatTopping(MeatType meatType, boolean extra) {
         this.name = meatType.name();
         this.basePrice = 1.0;
     }
 
     public enum MeatType {
-        STEAK,
-        HAM,
-        SALAMI,
-        ROAST_BEEF,
-        CHICKEN,
-        BACON
+        STEAK("Steak"),
+        HAM("Ham"),
+        SALAMI("Salami"),
+        ROAST_BEEF("Roast Beef"),
+        CHICKEN("Chicken"),
+        BACON("Bacon");
+
+        private final String meat;
+
+        MeatType(String meat) {
+            this.meat = meat;
+        }
+
+        public String getMeat() {
+            return meat;
+        }
     }
 
     @Override

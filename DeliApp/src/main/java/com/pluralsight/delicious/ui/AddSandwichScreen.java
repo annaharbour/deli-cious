@@ -10,7 +10,6 @@ public class AddSandwichScreen implements ScreenState {
     @Override
     public void display() {
         System.out.println("Select from the following options: 1) custom sandwich or view our signature sandwiches?");
-
     }
 
     @Override

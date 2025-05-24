@@ -1,18 +1,20 @@
 package com.pluralsight.delicious.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Sandwich implements MenuItem{
+public class Sandwich implements MenuItem {
     public enum Size {
-        SMALL(4),
-        MEDIUM(8),
-        LARGE(12);
+        FOUR_INCH(4),
+        EIGHT_INCH(8),
+        TWELVE_INCH(12);
 
         private final int value;
 
         Size(int value) {
             this.value = value;
         }
+
         public int getValue() {
             return value;
         }
@@ -27,13 +29,18 @@ public class Sandwich implements MenuItem{
 
     private Size size;
     private BreadType breadType;
-    private List<Topping> toppings;
+    private List<Topping> toppings = new ArrayList<>();
+    private List<Sauce> sauces;
+    private List<Side> sides;
     boolean toasted;
+
+    public Sandwich() {
+    }
 
     public Sandwich(Size size, BreadType breadType, List<Topping> toppings, boolean toasted) {
         this.size = size;
         this.breadType = breadType;
-        this.toppings = toppings;
+        this.toppings = (toppings != null) ? toppings : new ArrayList<>();
         this.toasted = toasted;
     }
 
@@ -57,8 +64,20 @@ public class Sandwich implements MenuItem{
         return toppings;
     }
 
-    public void setToppings(List<Topping> toppings) {
-        this.toppings = toppings;
+    public void addTopping(Topping topping) {
+        this.toppings.add(topping);
+    }
+
+    public void removeTopping(Topping topping) {
+        this.toppings.remove(topping);
+    }
+
+    public void addSauce(Sauce sauce) {
+        this.sauces.add(sauce);
+    }
+
+    public void removeSauce(Sauce sauce) {
+        this.toppings.remove(sauce);
     }
 
     public boolean isToasted() {

@@ -1,5 +1,6 @@
 package com.pluralsight.delicious.ui;
 
+import com.pluralsight.delicious.models.Drink;
 import com.pluralsight.delicious.models.Order;
 
 import java.util.Scanner;
@@ -18,14 +19,17 @@ public class AddDrinkScreen implements ScreenState {
             case 0 -> new OrderScreen();
             case 1 -> {
                 System.out.println("Ordering small drink");
+                currentOrder.addToOrder(new Drink(Drink.Size.SMALL));
                 yield new OrderScreen();
             }
             case 2 -> {
                 System.out.println("Ordering medium drink");
+                currentOrder.addToOrder(new Drink(Drink.Size.MEDIUM));
                 yield new OrderScreen();
             }
             case 3 -> {
                 System.out.println("Ordering large drink");
+                currentOrder.addToOrder(new Drink(Drink.Size.LARGE));
                 yield new OrderScreen();
             }
             default -> {

@@ -3,13 +3,12 @@ package com.pluralsight.delicious.models;
 public class Chips implements MenuItem {
     private double price;
 
-    public Chips(double price) {
-        this.price = 1.0;
+    public Chips() {
     }
 
     @Override
     public double getPrice() {
-        return price;
+        return 1.00;
     }
 
     @Override

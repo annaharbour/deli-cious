@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CheckoutScreen implements ScreenState{
     @Override
     public void display() {
-        System.out.println("Checking out...");
+        System.out.println("Enter the name for your order?");
     }
 
     @Override
