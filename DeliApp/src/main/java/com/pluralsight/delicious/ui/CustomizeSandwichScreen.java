@@ -34,6 +34,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         chooseCheese(scanner, sandwich);
         chooseVeggies(scanner, sandwich);
         chooseSauces(scanner, sandwich);
+        chooseSides(scanner, sandwich);
         chooseToasted(scanner, sandwich);
 
         // TODO: Return the next screen or the current screen based on user input
@@ -49,7 +50,7 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseToasted(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Do you want it toasted? \n\t(1) Yes \n\t2) No");
+        System.out.println("Do you want it toasted? \n\t1) Yes \n\t2) No");
         int toastedChoice = scanner.nextInt();
         do {
             switch (toastedChoice) {
@@ -75,8 +76,26 @@ public class CustomizeSandwichScreen implements ScreenState {
                 System.out.println("Invalid choice, please select a valid sauce option.");
             }
         } while (sauceChoice < 1 || sauceChoice > sauceOptions.length);
-
+        sandwich.addSauce(new Sauce(sauceOptions[sauceChoice - 1]));
     }
+
+
+    private static void chooseSides(Scanner scanner, Sandwich sandwich) {
+        System.out.println("Add Sides");
+        Side.SideType[] sideOptions = Side.getAllSideOptions();
+        for (int i = 0; i <= sideOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, sideOptions[i].getSideName());
+        }
+        int sideChoice;
+        do {
+            sideChoice = scanner.nextInt();
+            if (sideChoice < 1 || sideChoice > sideOptions.length) {
+                System.out.println("Invalid choice, please select a valid side option.");
+            }
+        } while (sideChoice < 1 || sideChoice > sideOptions.length);
+        sandwich.addSide(new Side(sideOptions[sideChoice - 1]));
+    }
+
 
     private static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add veggies:");

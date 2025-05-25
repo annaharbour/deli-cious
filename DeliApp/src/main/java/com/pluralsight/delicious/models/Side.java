@@ -31,6 +31,10 @@ public class Side {
         this.sauce = sauce;
     }
 
+    public static SideType[] getAllSideOptions() {
+        return SideType.values();
+    }
+
     @Override
     public String toString() {
         return (type == SideType.SAUCE && sauce != null)

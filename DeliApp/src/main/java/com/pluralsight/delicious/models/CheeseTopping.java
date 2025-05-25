@@ -2,6 +2,8 @@ package com.pluralsight.delicious.models;
 
 public class CheeseTopping extends PremiumTopping {
     public CheeseTopping(CheeseType cheeseType, boolean extra) {
+        this.name = cheeseType.cheeseName;
+
         this.basePrice = 0.75;
     }
 
@@ -24,6 +26,11 @@ public class CheeseTopping extends PremiumTopping {
 
     public static CheeseTopping.CheeseType[] getAllCheeseOptions() {
         return CheeseTopping.CheeseType.values();
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
     @Override

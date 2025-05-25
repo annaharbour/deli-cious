@@ -16,7 +16,6 @@ public class OrderScreen implements ScreenState {
         }
     }
 
-
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         int input = scanner.nextInt();
         return switch (input) {

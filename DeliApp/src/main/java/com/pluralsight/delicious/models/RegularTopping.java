@@ -3,6 +3,7 @@ package com.pluralsight.delicious.models;
 public class RegularTopping extends Topping {
     private String toppingName;
 
+
     public enum FreeTopping {
         LETTUCE("Lettuce"),
         PEPPERS("Peppers"),
@@ -18,6 +19,7 @@ public class RegularTopping extends Topping {
 
         FreeTopping(String toppingName) {
             this.toppingName = toppingName;
+
         }
 
         public String getToppingName() {
@@ -26,21 +28,27 @@ public class RegularTopping extends Topping {
     }
 
     public RegularTopping(FreeTopping freeTopping) {
-        this.toppingName = freeTopping.name();
+        this.toppingName = freeTopping.getToppingName();
     }
 
     public static RegularTopping.FreeTopping[] getAllRegularToppings() {
         return RegularTopping.FreeTopping.values();
     }
 
+    @Override
+    public String getName() {
+
+        return toppingName;
+    }
+
+    @Override
+    public String toString() {
+        return toppingName;
+    }
 
     @Override
     public double getPrice(int sizeInInches, boolean extra) {
         return 0;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

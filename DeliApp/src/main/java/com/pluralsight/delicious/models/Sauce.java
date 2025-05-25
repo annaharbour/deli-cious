@@ -26,6 +26,11 @@ public class Sauce {
         this.sauceName = sauceType.sauceName;
     }
 
+    @Override
+    public String toString() {
+        return this.sauceName;
+    }
+
     public static Sauce.SauceType[] getAllSauceOptions() {
         return Sauce.SauceType.values();
     }

@@ -42,8 +42,8 @@ public class Sandwich implements MenuItem {
     private SandwichSize size;
     private BreadType breadType;
     private List<Topping> toppings = new ArrayList<>();
-    private List<Sauce> sauces;
-    private List<Side> sides;
+    private List<Sauce> sauces = new ArrayList<>();
+    private List<Side> sides = new ArrayList<>();
     boolean toasted;
 
     public Sandwich() {
@@ -93,7 +93,15 @@ public class Sandwich implements MenuItem {
     }
 
     public void removeSauce(Sauce sauce) {
-        this.toppings.remove(sauce);
+        this.sauces.remove(sauce);
+    }
+
+    public void addSide(Side side) {
+        this.sides.add(side);
+    }
+
+    public void removeSide(Side side) {
+        this.sides.remove(side);
     }
 
     public boolean isToasted() {
@@ -129,12 +137,41 @@ public class Sandwich implements MenuItem {
 
     @Override
     public String getOrderLine() {
-        return "Sandwich{" +
-                "size=" + size +
-                ", breadType=" + breadType +
-                ", toppings=" + toppings +
-                ", toasted=" + toasted +
-                '}';
+        StringBuilder orderLine = new StringBuilder("Sandwich Details:\n");
+        orderLine.append("\tSize: ").append(size.getValue()).append("\n");
+        orderLine.append("\tBread Type: ").append(breadType.getValue()).append("\n");
+        orderLine.append("\tToppings: ");
+        for (Topping topping : toppings) {
+            if (topping instanceof MeatTopping meatTopping) {
+                orderLine.append(meatTopping);
+            } else if (topping instanceof CheeseTopping cheeseTopping) {
+                orderLine.append(cheeseTopping).append(" Cheese");
+            } else if(topping instanceof RegularTopping regularTopping) {
+                orderLine.append(regularTopping.getName());
+            }
+            orderLine.append(", ");
+            if (toppings.size() == toppings.indexOf(topping) + 1) {
+                orderLine.setLength(orderLine.length() - 2);
+            }
+        }
+        orderLine.append("\n\tSauces: ");
+        for (Sauce sauce : sauces) {
+            orderLine.append(sauce).append(", ");
+        }
+        if (!sauces.isEmpty()) {
+            orderLine.setLength(orderLine.length() - 2);
+        }
+
+        orderLine.append("\n\tSides: ");
+        for (Side side : sides) {
+            orderLine.append(side.toString()).append(", ");
+        }
+        if (!sides.isEmpty()) {
+            orderLine.setLength(orderLine.length() - 2);
+        }
+
+        orderLine.append("\n\tToasted: ").append(toasted ? "Yes" : "No").append("\n");
+        return orderLine.toString();
     }
 
 }
