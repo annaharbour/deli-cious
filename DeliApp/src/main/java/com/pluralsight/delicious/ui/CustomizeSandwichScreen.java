@@ -2,8 +2,6 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.*;
 
-import java.awt.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CustomizeSandwichScreen implements ScreenState {
@@ -16,12 +14,16 @@ public class CustomizeSandwichScreen implements ScreenState {
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         Sandwich sandwich = new Sandwich();
-        System.out.println("Select sandwich size: 4 for 4\", 8 for 8\", 12 for 12\"");
+        Sandwich.SandwichSize[] sizeOptions = Sandwich.getAllSizeOptions();
+        System.out.println("Select sandwich size:");
+        for (int i = 0; i <= sizeOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, sizeOptions[i].getValue());
+        }
         int sizeChoice = scanner.nextInt();
         switch (sizeChoice) {
-            case 4 -> sandwich.setSize(Sandwich.Size.FOUR_INCH);
-            case 8 -> sandwich.setSize(Sandwich.Size.EIGHT_INCH);
-            case 12 -> sandwich.setSize(Sandwich.Size.TWELVE_INCH);
+            case 1 -> sandwich.setSandwichSize(Sandwich.SandwichSize.FOUR_INCH);
+            case 2 -> sandwich.setSandwichSize(Sandwich.SandwichSize.EIGHT_INCH);
+            case 3 -> sandwich.setSandwichSize(Sandwich.SandwichSize.TWELVE_INCH);
             default -> {
                 System.out.println("Incorrect size, try again.");
                 return new CustomizeSandwichScreen();
@@ -36,35 +38,36 @@ public class CustomizeSandwichScreen implements ScreenState {
 
         // TODO: Return the next screen or the current screen based on user input
         System.out.println("Here's your order");
-        System.out.println(sandwich);
+        System.out.println(sandwich.getOrderLine());
         System.out.println("Would you like to: \n\t1) Order another sandwich\n\t2) Order multiple of this " +
                 "sandwich\n\t3) Order another sandwich\n\t4) Edit this sandwich\n\t5) Return to order " +
                 "screen\n\t6) Checkout\n\t0) " +
                 "Cancel Order");
 //        TODO: screens switch
+        currentOrder.addToOrder(sandwich);
         return new OrderScreen();
     }
 
     private static void chooseToasted(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Do you want it toasted? (1) Yes 2) No");
+        System.out.println("Do you want it toasted? \n\t(1) Yes \n\t2) No");
         int toastedChoice = scanner.nextInt();
-        switch (toastedChoice) {
-            case 1 -> sandwich.setToasted(true);
-            case 2 -> sandwich.setToasted(false);
-            default -> {
-                System.out.println("Incorrect input");
-                chooseToasted(scanner, sandwich);
+        do {
+            switch (toastedChoice) {
+                case 1 -> sandwich.setToasted(true);
+                case 2 -> sandwich.setToasted(false);
+                default -> {
+                    System.out.println("Incorrect input");
+                }
             }
-        }
+        } while (toastedChoice != 1 && toastedChoice != 2);
     }
 
     private static void chooseSauces(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add Sauces");
-        int sauceCount = 1;
-        for (Sauce.SauceType sauce : Sauce.SauceType.values()) {
-            System.out.printf("\n\t%d) %s\n", sauceCount++, sauce);
+        Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
+        for (int i = 0; i <= sauceOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, sauceOptions[i].getSauceName());
         }
-        Sauce.SauceType[] sauceOptions = Sauce.SauceType.values();
         int sauceChoice;
         do {
             sauceChoice = scanner.nextInt();
@@ -77,11 +80,10 @@ public class CustomizeSandwichScreen implements ScreenState {
 
     private static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add veggies:");
-//        for (RegularTopping.FreeTopping regularTopping : RegularTopping.FreeTopping.values()) {
-//            System.out.println(regularTopping);
-//        }
-        RegularTopping.FreeTopping[] toppingOptions = RegularTopping.FreeTopping.values();
-        Arrays.stream(toppingOptions).forEach(System.out::println);
+        RegularTopping.FreeTopping[] toppingOptions = RegularTopping.getAllRegularToppings();
+        for (int i = 0; i <= toppingOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, toppingOptions[i].getToppingName());
+        }
         int toppingChoice;
         do {
             toppingChoice = scanner.nextInt();
@@ -99,16 +101,16 @@ public class CustomizeSandwichScreen implements ScreenState {
             sandwich.addTopping(new RegularTopping(toppingOptions[toppingChoice - 1]));
         } else {
             System.out.println("Invalid choice, please try again.");
-            chooseMeat(scanner, sandwich);
+            chooseVeggies(scanner, sandwich);
         }
     }
 
     private static void chooseCheese(Scanner scanner, Sandwich sandwich) {
         System.out.println("Select a cheese option:");
-        for (CheeseTopping.CheeseType cheeseTopping : CheeseTopping.CheeseType.values()) {
-            System.out.println(cheeseTopping);
+        CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.getAllCheeseOptions();
+        for (int i = 0; i <= cheeseOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, cheeseOptions[i].getCheeseName());
         }
-        CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.CheeseType.values();
         int cheeseChoice;
         do {
             cheeseChoice = scanner.nextInt();
@@ -125,16 +127,16 @@ public class CustomizeSandwichScreen implements ScreenState {
             sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], false));
         } else {
             System.out.println("Invalid choice, please try again.");
-            chooseMeat(scanner, sandwich);
+            chooseCheese(scanner, sandwich);
         }
     }
 
     private static void chooseMeat(Scanner scanner, Sandwich sandwich) {
         System.out.println("Select a meat option:");
-        for (MeatTopping.MeatType topping : MeatTopping.MeatType.values()) {
-            System.out.println(topping);
+        MeatTopping.MeatType[] meatOptions = MeatTopping.getAllMeatOptions();
+        for (int i = 0; i <= meatOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, meatOptions[i].getMeatName());
         }
-        MeatTopping.MeatType[] meatOptions = MeatTopping.MeatType.values();
         int meatChoice;
         do {
             meatChoice = scanner.nextInt();
@@ -156,17 +158,23 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseBread(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Select your bread:\n\t1) White \n\t2) Rye\n\t3) Multigrain\n\t4) Whole Grain");
-        int breadChoice = scanner.nextInt();
-        switch (breadChoice) {
-            case 1 -> sandwich.setBreadType(Sandwich.BreadType.WHITE);
-            case 2 -> sandwich.setBreadType(Sandwich.BreadType.RYE);
-            case 3 -> sandwich.setBreadType(Sandwich.BreadType.MULTIGRAIN);
-            case 4 -> sandwich.setBreadType(Sandwich.BreadType.WHOLE_GRAIN);
-            default -> {
-                System.out.println("Incorrect selection");
-                chooseBread(scanner, sandwich);
-            }
+        Sandwich.BreadType[] breadOptions = Sandwich.getAllBreadOptions();
+        System.out.println("Select sandwich size:");
+        for (int i = 0; i <= breadOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, breadOptions[i].getValue());
         }
+        int breadChoice;
+        do {
+            breadChoice = scanner.nextInt();
+            switch (breadChoice) {
+                case 1 -> sandwich.setBreadType(Sandwich.BreadType.WHITE);
+                case 2 -> sandwich.setBreadType(Sandwich.BreadType.RYE);
+                case 3 -> sandwich.setBreadType(Sandwich.BreadType.MULTIGRAIN);
+                case 4 -> sandwich.setBreadType(Sandwich.BreadType.WHOLE_GRAIN);
+                default -> {
+                    System.out.println("Incorrect selection");
+                }
+            }
+        } while (breadChoice < 1 || breadChoice > breadOptions.length);
     }
 }

@@ -14,14 +14,14 @@ public class MeatTopping extends PremiumTopping {
         CHICKEN("Chicken"),
         BACON("Bacon");
 
-        private final String meat;
+        private final String meatName;
 
-        MeatType(String meat) {
-            this.meat = meat;
+        MeatType(String meatName) {
+            this.meatName = meatName;
         }
 
-        public String getMeat() {
-            return meat;
+        public String getMeatName() {
+            return meatName;
         }
     }
 
@@ -34,4 +34,9 @@ public class MeatTopping extends PremiumTopping {
             default -> 0;
         };
     }
+
+    public static MeatType[] getAllMeatOptions() {
+        return MeatType.values();
+    }
+
 }

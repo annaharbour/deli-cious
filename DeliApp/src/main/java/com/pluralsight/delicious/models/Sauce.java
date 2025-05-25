@@ -4,19 +4,30 @@ public class Sauce {
     private String sauceName;
 
     public enum SauceType {
-        MAYO,
-        MUSTARD,
-        KETCHUP,
-        RANCH,
-        THOUSAND_ISLAND,
-        VINAIGRETTE
+        MAYO("Mayo"),
+        MUSTARD("Mustard"),
+        KETCHUP("Ketchup"),
+        RANCH("Ranch"),
+        THOUSAND_ISLAND("Thousand Island"),
+        VINAIGRETTE("Vinaigrette");
+
+        private final String sauceName;
+
+        SauceType(String sauceName) {
+            this.sauceName = sauceName;
+        }
+
+        public String getSauceName() {
+            return sauceName;
+        }
     }
 
     public Sauce(SauceType sauceType) {
-        this.sauceName = sauceType.name();
+        this.sauceName = sauceType.sauceName;
     }
 
-    public String getSauceName() {
-        return sauceName;
+    public static Sauce.SauceType[] getAllSauceOptions() {
+        return Sauce.SauceType.values();
     }
+
 }

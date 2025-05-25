@@ -3,19 +3,19 @@ package com.pluralsight.delicious.models;
 import java.util.List;
 
 public class SignatureSandwich extends Sandwich {
-    private String name;
+    private String signatureSandwichName;
 
-    public SignatureSandwich(Size size, BreadType breadType, List<Topping> toppings, List<Sauce> sauces,
-                             List<Side> sides, boolean toasted, String name) {
-        super(size, breadType, toppings, toasted);
-        this.name = name;
+    public SignatureSandwich(SandwichSize size, BreadType breadType, List<Topping> toppings, List<Sauce> sauces,
+                             List<Side> sides, boolean toasted, String signatureSandwichName) {
+        super(size, breadType, toppings, sauces, sides, toasted);
+        this.signatureSandwichName = signatureSandwichName;
     }
 
-    public String getName() {
-        return name;
+    public String getSignatureSandwichName() {
+        return this.signatureSandwichName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String signatureSandwichName) {
+        this.signatureSandwichName = signatureSandwichName;
     }
 }

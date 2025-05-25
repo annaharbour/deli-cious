@@ -1,10 +1,20 @@
 package com.pluralsight.delicious.models;
 
 public class Side {
-//    can either be au jus or sauce on the side
+    //    can either be au jus or sauce on the side
     public enum SideType {
-        AU_JUS,
-        SAUCE
+        AU_JUS("Au Jus"),
+        SAUCE("Sauce");
+
+        private final String sideName;
+
+        SideType(String sideName) {
+            this.sideName = sideName;
+        }
+
+        public String getSideName() {
+            return sideName;
+        }
     }
 
     private final SideType type;
@@ -24,7 +34,7 @@ public class Side {
     @Override
     public String toString() {
         return (type == SideType.SAUCE && sauce != null)
-                ? sauce.getSauceName()
+                ? SideType.SAUCE.getSideName()
                 : "Au Jus";
     }
 }
