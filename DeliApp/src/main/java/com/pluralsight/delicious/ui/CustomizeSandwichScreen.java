@@ -3,6 +3,7 @@ package com.pluralsight.delicious.ui;
 import com.pluralsight.delicious.models.*;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CustomizeSandwichScreen implements ScreenState {
@@ -26,7 +27,6 @@ public class CustomizeSandwichScreen implements ScreenState {
                 return new CustomizeSandwichScreen();
             }
         }
-
         chooseBread(scanner, sandwich);
         chooseMeat(scanner, sandwich);
         chooseCheese(scanner, sandwich);
@@ -35,6 +35,13 @@ public class CustomizeSandwichScreen implements ScreenState {
         chooseToasted(scanner, sandwich);
 
         // TODO: Return the next screen or the current screen based on user input
+        System.out.println("Here's your order");
+        System.out.println(sandwich);
+        System.out.println("Would you like to: \n\t1) Order another sandwich\n\t2) Order multiple of this " +
+                "sandwich\n\t3) Order another sandwich\n\t4) Edit this sandwich\n\t5) Return to order " +
+                "screen\n\t6) Checkout\n\t0) " +
+                "Cancel Order");
+//        TODO: screens switch
         return new OrderScreen();
     }
 
@@ -44,23 +51,37 @@ public class CustomizeSandwichScreen implements ScreenState {
         switch (toastedChoice) {
             case 1 -> sandwich.setToasted(true);
             case 2 -> sandwich.setToasted(false);
-            default -> System.out.println("Incorrect input");
+            default -> {
+                System.out.println("Incorrect input");
+                chooseToasted(scanner, sandwich);
+            }
         }
     }
 
     private static void chooseSauces(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add Sauces");
-        for (RegularTopping.FreeTopping topping : RegularTopping.FreeTopping.values()) {
-            System.out.println(topping);
+        int sauceCount = 1;
+        for (Sauce.SauceType sauce : Sauce.SauceType.values()) {
+            System.out.printf("\n\t%d) %s\n", sauceCount++, sauce);
         }
+        Sauce.SauceType[] sauceOptions = Sauce.SauceType.values();
+        int sauceChoice;
+        do {
+            sauceChoice = scanner.nextInt();
+            if (sauceChoice < 1 || sauceChoice > sauceOptions.length) {
+                System.out.println("Invalid choice, please select a valid sauce option.");
+            }
+        } while (sauceChoice < 1 || sauceChoice > sauceOptions.length);
+
     }
 
     private static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add veggies:");
-        for (RegularTopping.FreeTopping cheeseTopping : RegularTopping.FreeTopping.values()) {
-            System.out.println(cheeseTopping);
-        }
+//        for (RegularTopping.FreeTopping regularTopping : RegularTopping.FreeTopping.values()) {
+//            System.out.println(regularTopping);
+//        }
         RegularTopping.FreeTopping[] toppingOptions = RegularTopping.FreeTopping.values();
+        Arrays.stream(toppingOptions).forEach(System.out::println);
         int toppingChoice;
         do {
             toppingChoice = scanner.nextInt();
@@ -69,11 +90,12 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (toppingChoice < 1 || toppingChoice > toppingOptions.length);
 
-        System.out.println("Would you like extra veg?\n\t1) Yes\n\t2) No");
-        int extra = scanner.nextInt();
-        if (extra == 1) {
+        System.out.println("Would you like more veggies?\n\t1) Yes\n\t2) No");
+        int moreVeggies = scanner.nextInt();
+        if (moreVeggies == 1) {
             sandwich.addTopping(new RegularTopping(toppingOptions[toppingChoice - 1]));
-        } else if (extra == 2) {
+            chooseVeggies(scanner, sandwich);
+        } else if (moreVeggies == 2) {
             sandwich.addTopping(new RegularTopping(toppingOptions[toppingChoice - 1]));
         } else {
             System.out.println("Invalid choice, please try again.");
@@ -95,7 +117,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length);
 
-        System.out.println("Would you like extra cheese?\n\t1) Yes\n\t2) No");
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", cheeseChoice);
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], true));
