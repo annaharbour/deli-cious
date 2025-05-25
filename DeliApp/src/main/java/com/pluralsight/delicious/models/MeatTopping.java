@@ -2,7 +2,7 @@ package com.pluralsight.delicious.models;
 
 public class MeatTopping extends PremiumTopping {
     public MeatTopping(MeatType meatType, boolean extra) {
-        this.name = meatType.name();
+        this.name = meatType.meatName;
         this.basePrice = 1.0;
     }
 
@@ -14,14 +14,14 @@ public class MeatTopping extends PremiumTopping {
         CHICKEN("Chicken"),
         BACON("Bacon");
 
-        private final String meat;
+        private final String meatName;
 
-        MeatType(String meat) {
-            this.meat = meat;
+        MeatType(String meatName) {
+            this.meatName = meatName;
         }
 
-        public String getMeat() {
-            return meat;
+        public String getMeatName() {
+            return meatName;
         }
     }
 
@@ -33,5 +33,14 @@ public class MeatTopping extends PremiumTopping {
             case 12 -> 1.50;
             default -> 0;
         };
+    }
+
+    public static MeatType[] getAllMeatOptions() {
+        return MeatType.values();
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
