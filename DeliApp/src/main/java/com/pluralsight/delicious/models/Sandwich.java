@@ -164,7 +164,7 @@ public class Sandwich implements MenuItem {
 
         orderLine.append("\n\tSides: ");
         for (Side side : sides) {
-            orderLine.append(side.toString()).append(", ");
+            orderLine.append(side).append(", ");
         }
         if (!sides.isEmpty()) {
             orderLine.setLength(orderLine.length() - 2);

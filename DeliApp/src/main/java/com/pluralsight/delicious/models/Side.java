@@ -38,7 +38,7 @@ public class Side {
     @Override
     public String toString() {
         return (type == SideType.SAUCE && sauce != null)
-                ? SideType.SAUCE.getValue()
+                ? sauce.toString()
                 : "Au Jus";
     }
 }
