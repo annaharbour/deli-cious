@@ -6,7 +6,6 @@ import com.pluralsight.delicious.models.Order;
 import java.util.Scanner;
 
 public class AddDrinkScreen implements ScreenState {
-    private String[] drinkSizes = {"1) Small", "2) Medium", "3) Large", "0) Go back"};
     @Override
     public void display() {
         System.out.println("What size drink would you like?");
@@ -14,8 +13,19 @@ public class AddDrinkScreen implements ScreenState {
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
-        int input = scanner.nextInt();
-        return switch (input){
+        Drink.Size[] drinkOptions = Drink.getAllDrinkOptions();
+        for (int i = 0; i <= drinkOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, drinkOptions[i].getValue());
+        }
+        int drinkChoice;
+        do {
+            drinkChoice = scanner.nextInt();
+            if (drinkChoice < 1 || drinkChoice > drinkOptions.length) {
+                System.out.println("Invalid choice, please select a valid meat option.");
+            }
+        } while (drinkChoice < 1 || drinkChoice > drinkOptions.length);
+
+        return switch (drinkChoice) {
             case 0 -> new OrderScreen();
             case 1 -> {
                 System.out.println("Ordering small drink");
@@ -33,7 +43,8 @@ public class AddDrinkScreen implements ScreenState {
                 yield new OrderScreen();
             }
             default -> {
-                System.out.println("Invalid option");;
+                System.out.println("Invalid option");
+                ;
                 yield this;
             }
         };

@@ -4,6 +4,7 @@ public class Chips implements MenuItem {
     private double price;
 
     public Chips() {
+        this.price = 1.00;
     }
 
     @Override
@@ -13,9 +14,7 @@ public class Chips implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        return "Chips{" +
-                "price=" + price +
-                '}';
+        return String.format("Chips,%.2f,", getPrice());
     }
 
 

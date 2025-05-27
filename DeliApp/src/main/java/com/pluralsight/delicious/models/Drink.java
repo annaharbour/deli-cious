@@ -14,7 +14,7 @@ public class Drink implements MenuItem {
             this.size = size;
         }
 
-        public String getSize() {
+        public String getValue() {
             return size;
         }
     }
@@ -38,10 +38,7 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        return "Drink{" +
-                "price=" + getPrice() +
-                ", size=" + size +
-                '}';
+         return String.format("Drink,%.2f,", getPrice());
     }
 
     @Override
