@@ -24,7 +24,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         chooseToasted(scanner, sandwich);
 
         // TODO: Return the next screen or the current screen based on user input
-        System.out.println("Here's your order");
+        System.out.println("Here's your sandwich order");
         System.out.println(sandwich.getOrderLine());
 //        System.out.println("Would you like to: \n\t1) Order another sandwich\n\t2) Order multiple of this " +
 //                "sandwich\n\t3) Order another sandwich\n\t4) Edit this sandwich\n\t5) Return to order " +

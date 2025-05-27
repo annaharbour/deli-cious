@@ -1,5 +1,5 @@
 package com.pluralsight.delicious.models;
-import java.awt.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +10,7 @@ public class Order {
 
     public Order(List<MenuItem> orderItems) {
         this.orderItems = orderItems;
+        this.timeStamp = LocalDateTime.now();
     }
 
     public void setCustomer(Customer customer) {
@@ -20,13 +21,9 @@ public class Order {
         return customer;
     }
 
-    public void addToOrder(MenuItem menuItem){
+    public void addToOrder(MenuItem menuItem) {
         this.orderItems.add(menuItem);
     }
-
-    public void removeFromOrder(MenuItem menuItem) {
-            this.orderItems.remove(menuItem);
-        }
 
     public List<MenuItem> getOrderItems() {
         return orderItems;
@@ -43,7 +40,7 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder order = new StringBuilder();
-        for(MenuItem orderItem: orderItems){
+        for (MenuItem orderItem : orderItems) {
             order.append(orderItem.getOrderLine());
         }
         return order.toString();

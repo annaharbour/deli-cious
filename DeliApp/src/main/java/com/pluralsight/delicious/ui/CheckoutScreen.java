@@ -1,5 +1,6 @@
 package com.pluralsight.delicious.ui;
 
+import com.pluralsight.delicious.dao.ReceiptWriter;
 import com.pluralsight.delicious.models.Customer;
 import com.pluralsight.delicious.models.Order;
 
@@ -25,10 +26,11 @@ public class CheckoutScreen implements ScreenState {
                 case 1 -> {
                     System.out.println("TODO: add order to receipt folder");
                     System.out.println(currentOrder);
+                    ReceiptWriter rw = new ReceiptWriter(currentOrder);
+                    rw.writeLines();
                 }
-                case 2 -> {
+                case 0 -> {
                     currentOrder = new Order(new ArrayList<>());
-
                 }
             }
         } while (input != 0 && input != 1);

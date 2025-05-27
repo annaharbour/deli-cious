@@ -117,7 +117,7 @@ public class Sandwich implements MenuItem {
             if (topping instanceof MeatTopping meatTopping) {
                 receiptLine.append(meatTopping).append(",");
             } else if (topping instanceof CheeseTopping cheeseTopping) {
-                receiptLine.append(cheeseTopping).append(" Cheese,");
+                receiptLine.append(cheeseTopping);
             } else if (topping instanceof RegularTopping regularTopping) {
                 receiptLine.append(regularTopping.getName()).append(",");
             }
@@ -128,14 +128,9 @@ public class Sandwich implements MenuItem {
         for (Side side : sides) {
             receiptLine.append(side).append(",");
         }
-        receiptLine.append(toasted ? "Toasted" : "Not Toasted");
+        receiptLine.append(toasted ? "Toasted" : "Not Toasted").append(",");
 
         receiptLine.append("Total Price").append(getPrice());
-
-        if (receiptLine.charAt(receiptLine.length() - 1) == ',') {
-            receiptLine.setLength(receiptLine.length() - 1);
-        }
-
         return receiptLine.toString();
     }
 
