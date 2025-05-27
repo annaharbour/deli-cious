@@ -29,12 +29,22 @@ public class MeatTopping extends PremiumTopping {
     }
 
     @Override
-    protected double getExtraCost(int sandwichSize) {
+    public double getPrice(Sandwich.SandwichSize sandwichSize) {
+        double base = switch (sandwichSize) {
+            case FOUR_INCH -> 1.00;
+            case EIGHT_INCH -> 2.00;
+            case TWELVE_INCH -> 3.00;
+        };
+        double extraCost = extra ? getExtraCost(sandwichSize) : 0;
+        return base + extraCost;
+    }
+
+    @Override
+    protected double getExtraCost(Sandwich.SandwichSize sandwichSize) {
         return switch (sandwichSize) {
-            case 4 -> 0.50;
-            case 8 -> 1.00;
-            case 12 -> 1.50;
-            default -> 0;
+            case FOUR_INCH -> 0.50;
+            case EIGHT_INCH -> 1.00;
+            case TWELVE_INCH -> 1.50;
         };
     }
 
@@ -44,6 +54,6 @@ public class MeatTopping extends PremiumTopping {
 
     @Override
     public String toString() {
-        return meatType.getValue() + (extra ? "/t ++ extra " : "");
+        return meatType.getValue() + (extra ? "(++extra)" : "");
     }
 }

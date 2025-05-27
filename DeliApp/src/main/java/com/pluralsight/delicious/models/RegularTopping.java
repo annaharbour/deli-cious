@@ -39,8 +39,7 @@ public class RegularTopping extends Topping {
     }
 
     @Override
-    public double getPrice(int sizeInInches, boolean extra) {
+    public double getPrice(Sandwich.SandwichSize size) {
         return 0;
     }
-
 }

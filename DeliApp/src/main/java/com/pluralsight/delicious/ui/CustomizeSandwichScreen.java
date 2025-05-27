@@ -110,13 +110,11 @@ public class CustomizeSandwichScreen implements ScreenState {
                             System.out.println("Invalid choice, please select a valid sauce option.");
                         }
                     } while (sauceChoice < 1 || sauceChoice > sauceOptions.length);
-                    sandwich.addSide(new Side(sideOptions[sideChoice - 1], new Sauce(sauceOptions[sauceChoice - 1])));
+                    sandwich.addSide(new Side(Side.SideType.SAUCE, new Sauce(sauceOptions[sauceChoice - 1])));
                 }
                 default -> System.out.println("Invalid choice, please select a valid side option.");
             }
         } while (sideChoice < 1 || sideChoice > sideOptions.length);
-
-        sandwich.addSide(new Side(sideOptions[sideChoice - 1]));
     }
 
 
@@ -162,7 +160,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length);
 
-        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", cheeseChoice);
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", cheeseOptions[cheeseChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], true));
@@ -188,7 +186,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (meatChoice < 1 || meatChoice > meatOptions.length);
 
-        System.out.println("Would you like extra meat?\n\t1) Yes\n\t2) No");
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", meatOptions[meatChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new MeatTopping(meatOptions[meatChoice - 1], true));

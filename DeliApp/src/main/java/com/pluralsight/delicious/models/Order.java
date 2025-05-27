@@ -1,7 +1,5 @@
 package com.pluralsight.delicious.models;
-
 import java.awt.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,9 +42,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "customer=" + customer +
-                ", orderItems=" + orderItems +
-                '}';
+        StringBuilder order = new StringBuilder();
+        for(MenuItem orderItem: orderItems){
+            order.append(orderItem.getOrderLine());
+        }
+        return order.toString();
     }
 }
