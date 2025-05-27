@@ -160,7 +160,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length);
 
-        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", cheeseOptions[cheeseChoice].getValue());
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", cheeseOptions[cheeseChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new CheeseTopping(cheeseOptions[cheeseChoice - 1], true));
@@ -186,7 +186,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (meatChoice < 1 || meatChoice > meatOptions.length);
 
-        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", meatOptions[meatChoice].getValue());
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", meatOptions[meatChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new MeatTopping(meatOptions[meatChoice - 1], true));
