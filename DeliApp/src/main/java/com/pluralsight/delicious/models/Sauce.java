@@ -17,7 +17,7 @@ public class Sauce {
             this.sauceName = sauceName;
         }
 
-        public String getSauceName() {
+        public String getValue() {
             return sauceName;
         }
     }

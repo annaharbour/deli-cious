@@ -13,7 +13,7 @@ public class CheeseTopping extends PremiumTopping {
             this.cheeseName = cheeseName;
         }
 
-        public String getCheeseName() {
+        public String getValue() {
             return cheeseName;
         }
     }
