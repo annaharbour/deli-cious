@@ -19,14 +19,14 @@ public class RegularTopping extends Topping {
 
         }
 
-        public String getToppingName() {
+        public String getValue() {
             return toppingName;
         }
     }
 
 
     public RegularTopping(FreeTopping freeTopping) {
-        this.name = freeTopping.getToppingName();
+        this.name = freeTopping.getValue();
     }
 
     public static RegularTopping.FreeTopping[] getAllRegularToppings() {

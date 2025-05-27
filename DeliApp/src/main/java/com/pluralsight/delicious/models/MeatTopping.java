@@ -15,14 +15,17 @@ public class MeatTopping extends PremiumTopping {
             this.meatName = meatName;
         }
 
-        public String getMeatName() {
+        public String getValue() {
             return meatName;
         }
     }
 
+    private boolean extra;
+    private MeatType meatType;
     public MeatTopping(MeatType meatType, boolean extra) {
-        this.name = meatType.meatName;
+        this.meatType = meatType;
         this.basePrice = 1.0;
+        this.extra = extra;
     }
 
     @Override
@@ -41,6 +44,6 @@ public class MeatTopping extends PremiumTopping {
 
     @Override
     public String toString() {
-        return this.name;
+        return meatType.getValue() + (extra ? "/t ++ extra " : "");
     }
 }

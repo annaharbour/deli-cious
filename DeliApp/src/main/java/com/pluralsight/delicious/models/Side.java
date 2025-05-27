@@ -12,7 +12,7 @@ public class Side {
             this.sideName = sideName;
         }
 
-        public String getSideName() {
+        public String getValue() {
             return sideName;
         }
     }
@@ -38,7 +38,7 @@ public class Side {
     @Override
     public String toString() {
         return (type == SideType.SAUCE && sauce != null)
-                ? SideType.SAUCE.getSideName()
+                ? SideType.SAUCE.getValue()
                 : "Au Jus";
     }
 }
