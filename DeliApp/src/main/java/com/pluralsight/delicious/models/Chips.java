@@ -1,7 +1,7 @@
 package com.pluralsight.delicious.models;
 
 public class Chips implements MenuItem {
-    private double price;
+    private final double price;
 
     public Chips() {
         this.price = 1.00;
@@ -9,12 +9,12 @@ public class Chips implements MenuItem {
 
     @Override
     public double getPrice() {
-        return 1.00;
+        return this.price;
     }
 
     @Override
     public String getReceiptLine() {
-        return String.format("Chips,%.2f,", getPrice());
+        return String.format("Chips,2.5oz Bag,%.2f,", getPrice());
     }
 
     @Override

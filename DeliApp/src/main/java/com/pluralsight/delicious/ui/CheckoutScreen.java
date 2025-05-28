@@ -24,8 +24,10 @@ public class CheckoutScreen implements ScreenState {
             input = scanner.nextInt();
             switch (input) {
                 case 1 -> {
-                    System.out.println("TODO: add order to receipt folder");
-                    System.out.println(currentOrder);
+                    System.out.println("Enter your name: ");
+                    scanner.nextLine();
+                    String customerName = scanner.nextLine();
+                    currentOrder.setCustomer(new Customer(customerName));
                     ReceiptWriter rw = new ReceiptWriter(currentOrder);
                     rw.writeLines();
                 }

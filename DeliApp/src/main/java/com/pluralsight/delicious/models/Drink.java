@@ -1,7 +1,7 @@
 package com.pluralsight.delicious.models;
 
 public class Drink implements MenuItem {
-    private Size size;
+    private final Size size;
 
     public enum Size {
         SMALL("Small"),
@@ -38,14 +38,11 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-         return String.format("Drink,%s.2f,", size.getValue(), getPrice());
+        return String.format("Drink,%s%.2f,", size.getValue(), getPrice());
     }
 
     @Override
     public String getOrderLine() {
-        return "Drink{" +
-                "price=" + getPrice() +
-                ", size=" + size +
-                '}';
+        return String.format("%s Drink: %.2f,", size.getValue(), getPrice());
     }
 }
