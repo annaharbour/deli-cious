@@ -45,7 +45,8 @@ public class Sandwich implements MenuItem {
     private List<Side> sides = new ArrayList<>();
     boolean toasted;
 
-    public Sandwich() {}
+    public Sandwich() {
+    }
 
     public Sandwich(SandwichSize size, BreadType breadType, List<Topping> toppings, List<Sauce> sauces,
                     List<Side> sides,
@@ -82,6 +83,15 @@ public class Sandwich implements MenuItem {
         this.toasted = toasted;
     }
 
+    public static Sandwich.SandwichSize[] getAllSizeOptions() {
+        return SandwichSize.values();
+    }
+
+    public static Sandwich.BreadType[] getAllBreadOptions() {
+        return BreadType.values();
+    }
+
+
     @Override
     public double getPrice() {
         double totalPrice = 0;
@@ -100,37 +110,33 @@ public class Sandwich implements MenuItem {
         return totalPrice;
     }
 
-    public static Sandwich.SandwichSize[] getAllSizeOptions() {
-        return SandwichSize.values();
-    }
-
-    public static Sandwich.BreadType[] getAllBreadOptions() {
-        return BreadType.values();
-    }
-
     @Override
     public String getReceiptLine() {
         StringBuilder receiptLine = new StringBuilder();
-        receiptLine.append(size.getValue()).append(",");
-        receiptLine.append(breadType.getValue()).append(",");
+        receiptLine.append(size.getValue()).append("\" Sandwich on");
+        receiptLine.append(breadType.getValue()).append(" Bread,");
+
         for (Topping topping : toppings) {
             if (topping instanceof MeatTopping meatTopping) {
-                receiptLine.append(meatTopping).append(",");
+                receiptLine.append(meatTopping);
             } else if (topping instanceof CheeseTopping cheeseTopping) {
                 receiptLine.append(cheeseTopping);
             } else if (topping instanceof RegularTopping regularTopping) {
-                receiptLine.append(regularTopping.getName()).append(",");
+                receiptLine.append(regularTopping);
             }
+            receiptLine.append(" | ");
         }
-        for (Sauce sauce : sauces) {
-            receiptLine.append(sauce).append(",");
-        }
-        for (Side side : sides) {
-            receiptLine.append(side).append(",");
-        }
-        receiptLine.append(toasted ? "Toasted" : "Not Toasted").append(",");
 
-        receiptLine.append("Total Price").append(getPrice());
+        for (Sauce sauce : sauces) {
+            receiptLine.append(sauce).append(" | ");
+        }
+
+        for (Side side : sides) {
+            receiptLine.append("Side of ").append(receiptLine.append(side)).append(" | ");
+        }
+
+        receiptLine.append(toasted ? " | Toasted" : "").append(",");
+        receiptLine.append(String.format("%.2f", getPrice()));
         return receiptLine.toString();
     }
 
@@ -146,7 +152,7 @@ public class Sandwich implements MenuItem {
             } else if (topping instanceof CheeseTopping cheeseTopping) {
                 orderLine.append(cheeseTopping);
             } else if (topping instanceof RegularTopping regularTopping) {
-                orderLine.append(regularTopping.getName());
+                orderLine.append(regularTopping);
             }
             orderLine.append(", ");
             if (toppings.size() == toppings.indexOf(topping) + 1) {
@@ -169,9 +175,8 @@ public class Sandwich implements MenuItem {
             orderLine.setLength(orderLine.length() - 2);
         }
 
-        orderLine.append("\n\tToasted: ").append(toasted ? "Yes" : "No").append("\n");
-        orderLine.append("Total Price: $ ").append(getPrice());
-
+        orderLine.append("\n\t").append(toasted ? "Toasted" : "Not Toasted").append("\n");
+        orderLine.append("Total Price: $ ").append(String.format("%.2f", getPrice()));
         return orderLine.toString();
     }
 

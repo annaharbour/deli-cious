@@ -54,6 +54,6 @@ public class MeatTopping extends PremiumTopping {
 
     @Override
     public String toString() {
-        return meatType.getValue() + (extra ? "(++extra)" : "");
+        return meatType.getValue() + (extra ? "(++extra)" : " ");
     }
 }
