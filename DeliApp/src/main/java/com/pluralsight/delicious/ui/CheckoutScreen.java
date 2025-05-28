@@ -33,9 +33,10 @@ public class CheckoutScreen implements ScreenState {
                 }
                 case 0 -> {
                     currentOrder = new Order(new ArrayList<>());
+                    return new OrderScreen();
                 }
             }
         } while (input != 0 && input != 1);
-        return new OrderScreen();
+        return null;
     }
 }

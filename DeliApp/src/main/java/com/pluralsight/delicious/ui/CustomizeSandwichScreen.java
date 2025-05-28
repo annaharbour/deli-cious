@@ -16,11 +16,33 @@ public class CustomizeSandwichScreen implements ScreenState {
         Sandwich sandwich = new Sandwich();
         chooseSandwichSize(scanner, sandwich);
         chooseBread(scanner, sandwich);
-        chooseMeat(scanner, sandwich);
-        chooseCheese(scanner, sandwich);
-        chooseVeggies(scanner, sandwich);
-        chooseSauces(scanner, sandwich);
-        chooseSides(scanner, sandwich);
+
+        int userChoice;
+        System.out.println("Would you like meat on your sandwich?\n\t1) Yes 0) No");
+        userChoice = scanner.nextInt();
+        if(userChoice == 1) {
+            chooseMeat(scanner, sandwich);
+        }
+        System.out.println("Would you like cheese on your sandwich?\n\t1) Yes 0) No");
+        userChoice = scanner.nextInt();
+        if(userChoice == 1) {
+            chooseCheese(scanner, sandwich);
+        }
+        System.out.println("Would you like other toppings on your sandwich?\n\t1) Yes 0) No");
+        userChoice = scanner.nextInt();
+        if(userChoice == 1) {
+            chooseVeggies(scanner, sandwich);
+        }
+        System.out.println("Would you like sauce on your sandwich?\n\t1) Yes 0) No");
+        userChoice = scanner.nextInt();
+        if(userChoice == 1) {
+            chooseSauces(scanner, sandwich);
+        }
+        System.out.println("Would you like other Au Jus or another sauce on your sandwich?\n\t1) Yes 0) No");
+        userChoice = scanner.nextInt();
+        if(userChoice == 1) {
+            chooseSides(scanner, sandwich);
+        }
         chooseToasted(scanner, sandwich);
         System.out.println("Here's your sandwich order");
         System.out.println(sandwich.getOrderLine());
