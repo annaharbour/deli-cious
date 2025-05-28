@@ -2,18 +2,19 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Drink;
 import com.pluralsight.delicious.models.Order;
-import com.pluralsight.delicious.models.Sauce;
 
 import java.util.Scanner;
 
 public class AddDrinkScreen implements ScreenState {
     @Override
     public void display() {
-        System.out.println("What size drink would you like?");
+        System.out.println("TODO: DISPLAY DRINK MENU");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
+        Drink drink = new Drink();
+        System.out.println("What size drink would you like?");
         Drink.Size[] drinkSizeOptions = Drink.getAllDrinkSizeOptions();
         for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
             System.out.printf("\n\t%d) %s", i + 1, drinkSizeOptions[i].getValue());
@@ -22,44 +23,38 @@ public class AddDrinkScreen implements ScreenState {
         do {
             drinkSizeChoice = scanner.nextInt();
             if (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length) {
-                System.out.println("Invalid choice, please select a valid meat option.");
+                System.out.println("Invalid choice, please select a valid size option.");
             }
         } while (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length);
 
-        Drink drink = new Drink();
-        switch (drinkSizeChoice) {
-            case 1 -> {
-                System.out.println("Ordering small drink");
-                drink.setSize(Drink.Size.SMALL);
-            }
-            case 2 -> {
-                System.out.println("Ordering medium drink");
-                drink.setSize(Drink.Size.MEDIUM);
-            }
-            case 3 -> {
-                System.out.println("Ordering large drink");
-                drink.setSize(Drink.Size.LARGE);
-            }
-            default -> {
-                System.out.println("Invalid option");
-            }
-        };
-//TODO: Flavor and ERROR HANDLING
-        System.out.println("What flavor drink?");
+        drink.setSize(drinkSizeOptions[drinkSizeChoice - 1]);
+
+        System.out.println("What flavor drink would you like?");
         Drink.Flavor[] flavorOptions = Drink.getAllDrinkFlavorOptions();
         for (int i = 0; i <= flavorOptions.length - 1; i++) {
             System.out.printf("\n\t%d) %s", i + 1, flavorOptions[i].getValue());
         }
-        int sauceChoice;
+        int flavorChoice;
         do {
-            sauceChoice = scanner.nextInt();
-            if (sauceChoice < 1 || sauceChoice > flavorOptions.length) {
-                System.out.println("Invalid choice, please select a valid sauce option.");
+            flavorChoice = scanner.nextInt();
+            if (flavorChoice < 1 || flavorChoice > flavorOptions.length) {
+                System.out.println("Invalid choice, please select a valid flavor option.");
             }
-        } while (sauceChoice < 1 || sauceChoice > flavorOptions.length);
-        drink.setFlavor(flavorOptions[flavorChoice -1]);
+        } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
+        drink.setFlavor(flavorOptions[flavorChoice - 1]);
 
-            currentOrder.addToOrder(drink);
-        return this;
+        System.out.printf("Would you like to add a %s %s for $%.2f to your order?", drink.getSize(),
+                drink.getFlavor(), drink.getPrice());
+        int confirmation;
+        do{
+            System.out.println("Enter 1) Confirm 0) Cancel Drink");
+            confirmation = scanner.nextInt();
+            if(confirmation == 1){
+                currentOrder.addToOrder(drink);
+                System.out.printf("Adding a %s %s to your order\n", drink.getSize(), drink.getFlavor());
+            }
+        } while (confirmation != 0 && confirmation != 1);
+        return new OrderScreen();
+
     }
 }

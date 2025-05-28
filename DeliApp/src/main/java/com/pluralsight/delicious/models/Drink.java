@@ -23,7 +23,7 @@ public class Drink implements MenuItem {
     public enum Flavor {
         FOUNTAIN_SODA("Fountain Soda"),
         BOTTLED_WATER("Bottled Water"),
-        JUICE("JUICE"),
+        JUICE("Juice"),
         ICED_TEA("Iced Tea"),
         COFFEE("Coffee");
 
@@ -56,12 +56,12 @@ public class Drink implements MenuItem {
         this.flavor = flavor;
     }
 
-    public Size getSize() {
-        return size;
+    public String getSize() {
+        return size.getValue();
     }
 
-    public Flavor getFlavor() {
-        return flavor;
+    public String getFlavor() {
+        return flavor.getValue();
     }
 
     public void setSize(Size size) {
@@ -79,11 +79,11 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        return String.format("Drink,%s%.2f,", size.getValue(), getPrice());
+        return String.format("%s Drink,%s,%.2f,", size.getValue(), flavor.getValue(), getPrice());
     }
 
     @Override
     public String getOrderLine() {
-        return String.format("%s %s: %.2f,", size.getValue(), flavor.getValue(), getPrice());
+        return String.format("%s %s: $%.2f,", size.getValue(), flavor.getValue(), getPrice());
     }
 }

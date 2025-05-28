@@ -42,7 +42,7 @@ public class Order {
     public String toString() {
         StringBuilder order = new StringBuilder();
         for (MenuItem orderItem : orderItems) {
-            order.append(orderItem.getOrderLine());
+            order.append(orderItem.getOrderLine()).append("\n");
         }
         return order.toString();
     }

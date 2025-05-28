@@ -9,29 +9,36 @@ public class AddChipsScreen implements ScreenState {
     @Override
     public void display() {
         System.out.println("Would you like to add chips for $1.50?");
-        System.out.println("\n\t1) Add Chips\n\t0) Cancel");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
-        int input = scanner.nextInt();
-        return switch (input) {
-            case 1 -> {
-                int numChips;
-                do {
-                    System.out.println("How many bags of chips would you like?");
-                    numChips = scanner.nextInt();
-                    for (int i = 0; i <= numChips; i++) {
-                        currentOrder.addToOrder(new Chips());
-                    }
-                } while (numChips <= 0 || numChips > 30);
-                yield new OrderScreen();
+        Chips chips = new Chips();
+        System.out.println("What flavor chips would you like?");
+        Chips.Flavor[] flavorOptions = Chips.getAllChipFlavors();
+        for (int i = 0; i <= flavorOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, flavorOptions[i].getValue());
+        }
+        int flavorChoice;
+        do {
+            flavorChoice = scanner.nextInt();
+            if (flavorChoice < 1 || flavorChoice > flavorOptions.length) {
+                System.out.println("Invalid choice, please select a valid flavor option.");
             }
-            case 2 -> new OrderScreen();
-            default -> {
-                System.out.println("Must select 1 or 2");
-                yield this;
+        } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
+        chips.setFlavor(flavorOptions[flavorChoice - 1]);
+
+        System.out.printf("Would you like to add a bag of %s chips for $%.2f to your order?", chips.getFlavor(),
+                chips.getPrice());
+        int confirmation;
+        do{
+            System.out.println("Enter 1) Confirm 0) Cancel Chips");
+            confirmation = scanner.nextInt();
+            if(confirmation == 1){
+                currentOrder.addToOrder(chips);
+                System.out.println("Adding chips to your order");
             }
-        };
+        } while (confirmation != 0 && confirmation != 1);
+        return new OrderScreen();
     }
 }

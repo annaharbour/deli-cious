@@ -1,5 +1,7 @@
 package com.pluralsight.delicious.models;
 
+import java.util.UUID;
+
 public class Customer {
     private final String customerName;
 

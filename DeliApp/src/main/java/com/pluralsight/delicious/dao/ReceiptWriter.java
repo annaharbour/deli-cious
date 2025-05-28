@@ -32,6 +32,7 @@ public class ReceiptWriter {
             Path filePath = folderPath.resolve(fileName);
 
             try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(filePath))) {
+//                pw.printf("\"Customer ID:\",\"%s\"%n", currentOrder.getCustomer().getCustomerID());
                 pw.printf("\"Customer Name:\",\"%s\"%n", currentOrder.getCustomer().getCustomerName());
                 pw.printf("\"Order Time:\",\"%s\"%n", currentOrder.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 pw.println("\"----------------------------------------\"");
