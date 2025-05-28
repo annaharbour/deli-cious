@@ -82,7 +82,7 @@ public class CheeseTopping extends PremiumTopping {
 
     @Override
     public String toString() {
-        return name + (extra ? " Cheese (++extra)" : "Cheese");
+        return name + (extra ? " Cheese (++extra)" : " Cheese");
     }
 
     @Override

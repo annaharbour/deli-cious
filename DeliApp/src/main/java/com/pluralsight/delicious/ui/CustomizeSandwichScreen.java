@@ -10,7 +10,6 @@ public class CustomizeSandwichScreen implements ScreenState {
         System.out.println("TODO: Display menu here");
     }
 
-
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         Sandwich sandwich = new Sandwich();
@@ -55,8 +54,9 @@ public class CustomizeSandwichScreen implements ScreenState {
 
     private static void chooseToasted(Scanner scanner, Sandwich sandwich) {
         System.out.println("Do you want it toasted? \n\t1) Yes \n\t2) No");
-        int toastedChoice = scanner.nextInt();
+        int toastedChoice;
         do {
+            toastedChoice = scanner.nextInt();
             switch (toastedChoice) {
                 case 1 -> sandwich.setToasted(true);
                 case 2 -> sandwich.setToasted(false);

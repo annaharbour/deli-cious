@@ -17,11 +17,8 @@ public class Chips implements MenuItem {
         return String.format("Chips,%.2f,", getPrice());
     }
 
-
     @Override
     public String getOrderLine() {
-        return "Chips{" +
-                "price=" + price +
-                '}';
+        return String.format("Chips: $%.2f,", getPrice());
     }
 }

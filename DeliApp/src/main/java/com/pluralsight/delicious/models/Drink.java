@@ -38,7 +38,7 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-         return String.format("Drink,%.2f,", getPrice());
+         return String.format("Drink,%s.2f,", size.getValue(), getPrice());
     }
 
     @Override
