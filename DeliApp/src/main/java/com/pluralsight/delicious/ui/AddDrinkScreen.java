@@ -8,45 +8,53 @@ import java.util.Scanner;
 public class AddDrinkScreen implements ScreenState {
     @Override
     public void display() {
-        System.out.println("What size drink would you like?");
+        System.out.println("TODO: DISPLAY DRINK MENU");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
-        Drink.Size[] drinkOptions = Drink.getAllDrinkOptions();
-        for (int i = 0; i <= drinkOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, drinkOptions[i].getValue());
+        Drink drink = new Drink();
+        System.out.println("What size drink would you like?");
+        Drink.Size[] drinkSizeOptions = Drink.getAllDrinkSizeOptions();
+        for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, drinkSizeOptions[i].getValue());
         }
-        int drinkChoice;
+        int drinkSizeChoice;
         do {
-            drinkChoice = scanner.nextInt();
-            if (drinkChoice < 1 || drinkChoice > drinkOptions.length) {
-                System.out.println("Invalid choice, please select a valid meat option.");
+            drinkSizeChoice = scanner.nextInt();
+            if (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length) {
+                System.out.println("Invalid choice, please select a valid size option.");
             }
-        } while (drinkChoice < 1 || drinkChoice > drinkOptions.length);
+        } while (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length);
 
-        return switch (drinkChoice) {
-            case 0 -> new OrderScreen();
-            case 1 -> {
-                System.out.println("Ordering small drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.SMALL));
-                yield new OrderScreen();
+        drink.setSize(drinkSizeOptions[drinkSizeChoice - 1]);
+
+        System.out.println("What flavor drink would you like?");
+        Drink.Flavor[] flavorOptions = Drink.getAllDrinkFlavorOptions();
+        for (int i = 0; i <= flavorOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, flavorOptions[i].getValue());
+        }
+        int flavorChoice;
+        do {
+            flavorChoice = scanner.nextInt();
+            if (flavorChoice < 1 || flavorChoice > flavorOptions.length) {
+                System.out.println("Invalid choice, please select a valid flavor option.");
             }
-            case 2 -> {
-                System.out.println("Ordering medium drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.MEDIUM));
-                yield new OrderScreen();
+        } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
+        drink.setFlavor(flavorOptions[flavorChoice - 1]);
+
+        System.out.printf("Would you like to add a %s %s for $%.2f to your order?", drink.getSize(),
+                drink.getFlavor(), drink.getPrice());
+        int confirmation;
+        do{
+            System.out.println("Enter 1) Confirm 0) Cancel Drink");
+            confirmation = scanner.nextInt();
+            if(confirmation == 1){
+                currentOrder.addToOrder(drink);
+                System.out.printf("Adding a %s %s to your order\n", drink.getSize(), drink.getFlavor());
             }
-            case 3 -> {
-                System.out.println("Ordering large drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.LARGE));
-                yield new OrderScreen();
-            }
-            default -> {
-                System.out.println("Invalid option");
-                ;
-                yield this;
-            }
-        };
+        } while (confirmation != 0 && confirmation != 1);
+        return new OrderScreen();
+
     }
 }

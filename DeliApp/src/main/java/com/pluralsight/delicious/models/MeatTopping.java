@@ -19,9 +19,9 @@ public class MeatTopping extends PremiumTopping {
             return meatName;
         }
     }
+    private final boolean extra;
+    private final MeatType meatType;
 
-    private boolean extra;
-    private MeatType meatType;
     public MeatTopping(MeatType meatType, boolean extra) {
         this.meatType = meatType;
         this.basePrice = 1.0;

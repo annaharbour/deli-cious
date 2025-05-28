@@ -2,11 +2,12 @@ package com.pluralsight.delicious.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
     private List<MenuItem> orderItems;
     private Customer customer;
-    private LocalDateTime timeStamp;
+    private final LocalDateTime timeStamp;
 
     public Order(List<MenuItem> orderItems) {
         this.orderItems = orderItems;
@@ -25,6 +26,10 @@ public class Order {
         this.orderItems.add(menuItem);
     }
 
+    public void removeFromOrder(MenuItem menuItem) {
+        this.orderItems = this.orderItems.stream().filter(item -> item != menuItem).collect(Collectors.toList());
+    }
+
     public List<MenuItem> getOrderItems() {
         return orderItems;
     }
@@ -33,15 +38,11 @@ public class Order {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
     @Override
     public String toString() {
         StringBuilder order = new StringBuilder();
         for (MenuItem orderItem : orderItems) {
-            order.append(orderItem.getOrderLine());
+            order.append(orderItem.getOrderLine()).append("\n");
         }
         return order.toString();
     }

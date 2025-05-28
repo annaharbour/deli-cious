@@ -2,6 +2,7 @@ package com.pluralsight.delicious.models;
 
 public class Drink implements MenuItem {
     private Size size;
+    private Flavor flavor;
 
     public enum Size {
         SMALL("Small"),
@@ -19,12 +20,52 @@ public class Drink implements MenuItem {
         }
     }
 
-    public Drink(Size size) {
-        this.size = size;
+    public enum Flavor {
+        FOUNTAIN_SODA("Fountain Soda"),
+        BOTTLED_WATER("Bottled Water"),
+        JUICE("Juice"),
+        ICED_TEA("Iced Tea"),
+        COFFEE("Coffee");
+
+        private final String flavor;
+
+        Flavor(String flavor) {
+            this.flavor = flavor;
+        }
+
+        public String getValue() {
+            return flavor;
+        }
     }
 
-    public static Drink.Size[] getAllDrinkOptions() {
+    public Drink(){}
+    public Drink(Size size, Flavor flavor) {
+        this.size = size;
+        this.flavor = flavor;
+    }
+
+    public static Drink.Size[] getAllDrinkSizeOptions() {
         return Drink.Size.values();
+    }
+
+    public static Drink.Flavor[] getAllDrinkFlavorOptions() {
+        return Drink.Flavor.values();
+    }
+
+    public void setFlavor(Flavor flavor) {
+        this.flavor = flavor;
+    }
+
+    public String getSize() {
+        return size.getValue();
+    }
+
+    public String getFlavor() {
+        return flavor.getValue();
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
     }
 
     @Override
@@ -38,14 +79,11 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-         return String.format("Drink,%s.2f,", size.getValue(), getPrice());
+        return String.format("%s Drink,%s,%.2f,", size.getValue(), flavor.getValue(), getPrice());
     }
 
     @Override
     public String getOrderLine() {
-        return "Drink{" +
-                "price=" + getPrice() +
-                ", size=" + size +
-                '}';
+        return String.format("%s %s: $%.2f,", size.getValue(), flavor.getValue(), getPrice());
     }
 }

@@ -35,7 +35,6 @@ public class Sandwich implements MenuItem {
         public String getValue() {
             return breadTypeName;
         }
-
     }
 
     private SandwichSize size;
@@ -112,32 +111,35 @@ public class Sandwich implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        StringBuilder receiptLine = new StringBuilder();
-        receiptLine.append(size.getValue()).append("\" Sandwich on");
-        receiptLine.append(breadType.getValue()).append(" Bread,");
+        StringBuilder receiptItem = new StringBuilder();
+        receiptItem.append(size.getValue()).append("\" Sandwich on ");
+        receiptItem.append(breadType.getValue()).append(" Bread");
 
+        StringBuilder receiptDetails = new StringBuilder();
         for (Topping topping : toppings) {
+            receiptDetails.append(" - ");
             if (topping instanceof MeatTopping meatTopping) {
-                receiptLine.append(meatTopping);
+                receiptDetails.append(meatTopping);
             } else if (topping instanceof CheeseTopping cheeseTopping) {
-                receiptLine.append(cheeseTopping);
+                receiptDetails.append(cheeseTopping);
             } else if (topping instanceof RegularTopping regularTopping) {
-                receiptLine.append(regularTopping);
+                receiptDetails.append(regularTopping);
             }
-            receiptLine.append(" | ");
-        }
 
+        }
         for (Sauce sauce : sauces) {
-            receiptLine.append(sauce).append(" | ");
-        }
+            receiptDetails.append(" - ");
+            receiptDetails.append(sauce);
 
+        }
         for (Side side : sides) {
-            receiptLine.append("Side of ").append(receiptLine.append(side)).append(" | ");
+            receiptDetails.append(" - ");
+            receiptDetails.append("Side of ").append(side);
         }
+        receiptDetails.append(" - ");
+        receiptDetails.append(toasted ? " | Toasted" : "Not Toasted");
 
-        receiptLine.append(toasted ? " | Toasted" : "").append(",");
-        receiptLine.append(String.format("%.2f", getPrice()));
-        return receiptLine.toString();
+        return String.format("%s, %s, %.2f", receiptItem, receiptDetails, getPrice());
     }
 
     @Override
