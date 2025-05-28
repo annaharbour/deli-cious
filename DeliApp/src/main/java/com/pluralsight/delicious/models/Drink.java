@@ -1,7 +1,8 @@
 package com.pluralsight.delicious.models;
 
 public class Drink implements MenuItem {
-    private final Size size;
+    private Size size;
+    private Flavor flavor;
 
     public enum Size {
         SMALL("Small"),
@@ -37,6 +38,7 @@ public class Drink implements MenuItem {
         }
     }
 
+    public Drink(){}
     public Drink(Size size, Flavor flavor) {
         this.size = size;
         this.flavor = flavor;
@@ -48,6 +50,22 @@ public class Drink implements MenuItem {
 
     public static Drink.Flavor[] getAllDrinkFlavorOptions() {
         return Drink.Flavor.values();
+    }
+
+    public void setFlavor(Flavor flavor) {
+        this.flavor = flavor;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public Flavor getFlavor() {
+        return flavor;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
     }
 
     @Override

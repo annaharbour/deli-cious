@@ -2,6 +2,7 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Drink;
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.models.Sauce;
 
 import java.util.Scanner;
 
@@ -17,36 +18,48 @@ public class AddDrinkScreen implements ScreenState {
         for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
             System.out.printf("\n\t%d) %s", i + 1, drinkSizeOptions[i].getValue());
         }
-        int drinkChoice;
+        int drinkSizeChoice;
         do {
-            drinkChoice = scanner.nextInt();
-            if (drinkChoice < 1 || drinkChoice > drinkSizeOptions.length) {
+            drinkSizeChoice = scanner.nextInt();
+            if (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length) {
                 System.out.println("Invalid choice, please select a valid meat option.");
             }
-        } while (drinkChoice < 1 || drinkChoice > drinkSizeOptions.length);
+        } while (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length);
 
-        return switch (drinkChoice) {
-            case 0 -> new OrderScreen();
+        Drink drink = new Drink();
+        switch (drinkSizeChoice) {
             case 1 -> {
                 System.out.println("Ordering small drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.SMALL));
-                yield new OrderScreen();
+                drink.setSize(Drink.Size.SMALL);
             }
             case 2 -> {
                 System.out.println("Ordering medium drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.MEDIUM));
-                yield new OrderScreen();
+                drink.setSize(Drink.Size.MEDIUM);
             }
             case 3 -> {
                 System.out.println("Ordering large drink");
-                currentOrder.addToOrder(new Drink(Drink.Size.LARGE));
-                yield new OrderScreen();
+                drink.setSize(Drink.Size.LARGE);
             }
             default -> {
                 System.out.println("Invalid option");
-                ;
-                yield this;
             }
         };
+//TODO: Flavor and ERROR HANDLING
+        System.out.println("What flavor drink?");
+        Drink.Flavor[] flavorOptions = Drink.getAllDrinkFlavorOptions();
+        for (int i = 0; i <= flavorOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, flavorOptions[i].getValue());
+        }
+        int sauceChoice;
+        do {
+            sauceChoice = scanner.nextInt();
+            if (sauceChoice < 1 || sauceChoice > flavorOptions.length) {
+                System.out.println("Invalid choice, please select a valid sauce option.");
+            }
+        } while (sauceChoice < 1 || sauceChoice > flavorOptions.length);
+        drink.setFlavor(flavorOptions[flavorChoice -1]);
+
+            currentOrder.addToOrder(drink);
+        return this;
     }
 }
