@@ -13,17 +13,17 @@ public class AddDrinkScreen implements ScreenState {
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
-        Drink.Size[] drinkOptions = Drink.getAllDrinkOptions();
-        for (int i = 0; i <= drinkOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, drinkOptions[i].getValue());
+        Drink.Size[] drinkSizeOptions = Drink.getAllDrinkSizeOptions();
+        for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
+            System.out.printf("\n\t%d) %s", i + 1, drinkSizeOptions[i].getValue());
         }
         int drinkChoice;
         do {
             drinkChoice = scanner.nextInt();
-            if (drinkChoice < 1 || drinkChoice > drinkOptions.length) {
+            if (drinkChoice < 1 || drinkChoice > drinkSizeOptions.length) {
                 System.out.println("Invalid choice, please select a valid meat option.");
             }
-        } while (drinkChoice < 1 || drinkChoice > drinkOptions.length);
+        } while (drinkChoice < 1 || drinkChoice > drinkSizeOptions.length);
 
         return switch (drinkChoice) {
             case 0 -> new OrderScreen();
