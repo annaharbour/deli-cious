@@ -18,27 +18,27 @@ public class CustomizeSandwichScreen implements ScreenState {
         chooseBread(scanner, sandwich);
 
         int userChoice;
-        System.out.println("Would you like meat on your sandwich?\n\t1) Yes 0) No");
+        System.out.println("Would you like meat on your sandwich?\n\t0) Pass\n\t1) Add Meat");
         userChoice = scanner.nextInt();
         if(userChoice == 1) {
             chooseMeat(scanner, sandwich);
         }
-        System.out.println("Would you like cheese on your sandwich?\n\t1) Yes 0) No");
+        System.out.println("Would you like cheese on your sandwich?\n\t0) Pass\n\t1) Add Cheese");
         userChoice = scanner.nextInt();
         if(userChoice == 1) {
             chooseCheese(scanner, sandwich);
         }
-        System.out.println("Would you like other toppings on your sandwich?\n\t1) Yes 0) No");
+        System.out.println("Would you like other toppings on your sandwich?\n\t0) Pass\n\t1) Add Vegetables");
         userChoice = scanner.nextInt();
         if(userChoice == 1) {
             chooseVeggies(scanner, sandwich);
         }
-        System.out.println("Would you like sauce on your sandwich?\n\t1) Yes 0) No");
+        System.out.println("Would you like sauce on your sandwich?\n\t0) Pass\n\t1) Add Sauce");
         userChoice = scanner.nextInt();
         if(userChoice == 1) {
             chooseSauces(scanner, sandwich);
         }
-        System.out.println("Would you like other Au Jus or another sauce on your sandwich?\n\t1) Yes 0) No");
+        System.out.println("Would you like other Au Jus or another sauce on the side?\n\t0) Pass\n\t1) Add Side");
         userChoice = scanner.nextInt();
         if(userChoice == 1) {
             chooseSides(scanner, sandwich);
@@ -87,7 +87,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         Sandwich.SandwichSize[] sizeOptions = Sandwich.getAllSizeOptions();
         System.out.println("Select sandwich size:");
         for (int i = 0; i <= sizeOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, sizeOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, sizeOptions[i].getValue());
         }
         int sizeChoice;
         do {
@@ -101,7 +101,7 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseToasted(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Do you want it toasted? \n\t1) Yes \n\t2) No");
+        System.out.println("Do you want it toasted? \n\t1) Yes \n\t2) No\n");
         int toastedChoice;
         do {
             toastedChoice = scanner.nextInt();
@@ -119,7 +119,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         System.out.println("Add Sauces");
         Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
         for (int i = 0; i <= sauceOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, sauceOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, sauceOptions[i].getValue());
         }
         int sauceChoice;
         do {
@@ -136,7 +136,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         System.out.println("Add Sides");
         Side.SideType[] sideOptions = Side.getAllSideOptions();
         for (int i = 0; i <= sideOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, sideOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, sideOptions[i].getValue());
         }
         int sideChoice;
         do {
@@ -163,14 +163,26 @@ public class CustomizeSandwichScreen implements ScreenState {
                 default -> System.out.println("Invalid choice, please select a valid side option.");
             }
         } while (sideChoice < 1 || sideChoice > sideOptions.length);
-    }
+        System.out.println("\nWould you like more sides?\n\t1) Yes\n\t2) No\n");
+        int moreVeggies;
+        do {
+            moreVeggies = scanner.nextInt();
+            if (moreVeggies == 1) {
+                chooseSides(scanner, sandwich);
+            } else if (moreVeggies == 2) {
+                System.out.println("Okay!");
+            } else {
+                System.out.println("Invalid choice, please try again.");
+            }
+        } while (moreVeggies != 1 && moreVeggies != 2);
 
+    }
 
     private static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
         System.out.println("Add veggies:");
         RegularTopping.FreeTopping[] toppingOptions = RegularTopping.getAllRegularToppings();
         for (int i = 0; i <= toppingOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, toppingOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, toppingOptions[i].getValue());
         }
         int toppingChoice;
         do {
@@ -179,7 +191,7 @@ public class CustomizeSandwichScreen implements ScreenState {
                 System.out.println("Invalid choice, please select a valid veg option.");
             }
         } while (toppingChoice < 1 || toppingChoice > toppingOptions.length);
-        System.out.println("Would you like more veggies?\n\t1) Yes\n\t2) No");
+        System.out.println("\nWould you like more veggies?\n\t1) Yes\n\t2) No\n");
         int moreVeggies;
         do {
             moreVeggies = scanner.nextInt();
@@ -195,10 +207,10 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseCheese(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Select a cheese option:");
+        System.out.println("\nSelect a cheese option:\n");
         CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.getAllCheeseOptions();
         for (int i = 0; i <= cheeseOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, cheeseOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, cheeseOptions[i].getValue());
         }
         int cheeseChoice;
         do {
@@ -208,7 +220,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (cheeseChoice < 1 || cheeseChoice > cheeseOptions.length);
 
-        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No",
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No\n",
                 cheeseOptions[cheeseChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
@@ -222,10 +234,10 @@ public class CustomizeSandwichScreen implements ScreenState {
     }
 
     private static void chooseMeat(Scanner scanner, Sandwich sandwich) {
-        System.out.println("Select a meat option:");
+        System.out.println("\nSelect a meat option:\n");
         MeatTopping.MeatType[] meatOptions = MeatTopping.getAllMeatOptions();
         for (int i = 0; i <= meatOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, meatOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, meatOptions[i].getValue());
         }
         int meatChoice;
         do {
@@ -235,7 +247,7 @@ public class CustomizeSandwichScreen implements ScreenState {
             }
         } while (meatChoice < 1 || meatChoice > meatOptions.length);
 
-        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No", meatOptions[meatChoice - 1].getValue());
+        System.out.printf("Would you like extra %s?\n\t1) Yes\n\t2) No\n", meatOptions[meatChoice - 1].getValue());
         int extra = scanner.nextInt();
         if (extra == 1) {
             sandwich.addTopping(new MeatTopping(meatOptions[meatChoice - 1], true));
@@ -251,7 +263,7 @@ public class CustomizeSandwichScreen implements ScreenState {
         Sandwich.BreadType[] breadOptions = Sandwich.getAllBreadOptions();
         System.out.println("Select sandwich size:");
         for (int i = 0; i <= breadOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s", i + 1, breadOptions[i].getValue());
+            System.out.printf("\n\t%d) %s\n", i + 1, breadOptions[i].getValue());
         }
         int breadChoice;
         do {

@@ -32,13 +32,14 @@ public class ReceiptWriter {
             Path filePath = folderPath.resolve(fileName);
 
             try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(filePath))) {
-//                pw.printf("\"Customer ID:\",\"%s\"%n", currentOrder.getCustomer().getCustomerID());
                 pw.printf("\"Customer Name:\",\"%s\"%n", currentOrder.getCustomer().getCustomerName());
+                pw.println("\"----------------------------------------------------\"");
                 pw.printf("\"Order Time:\",\"%s\"%n", currentOrder.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                pw.println("\"----------------------------------------\"");
+                pw.println("\"----------------------------------------------------\"");
                 pw.println("\"Item\",\"Details\",\"Price\"");
-
                 currentOrder.getOrderItems().forEach(item -> pw.println(item.getReceiptLine()));
+                pw.println("\"-----------------------------------------------------\"");
+                pw.printf(String.format("\nOrder Total, , %.2f", currentOrder.getPrice()));
             }
             System.out.println("Receipt written to file: " + filePath);
         } catch (IOException e) {
