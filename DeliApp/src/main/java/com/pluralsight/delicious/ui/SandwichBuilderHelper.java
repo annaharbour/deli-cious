@@ -2,6 +2,7 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class SandwichBuilderHelper {
@@ -118,6 +119,88 @@ public class SandwichBuilderHelper {
         }
         int choice = handleInput(scanner, 2);
         sandwich.setToasted(choice == 1);
+    }
+
+
+    public static void removeSide(SignatureSandwich sandwich, Scanner scanner) {
+        List<Side> sides = sandwich.getSides();
+        if (sides.isEmpty()) {
+            System.out.println("There are no sides to remove.");
+            return;
+        }
+        System.out.println("Select a side to remove:");
+        for (int i = 0; i < sides.size(); i++) {
+            System.out.printf("\t%d) %s%n", i + 1, sides.get(i));
+        }
+        int sideChoice;
+        do {
+            System.out.print("Your choice: ");
+            sideChoice = scanner.nextInt();
+            if (sideChoice < 1 || sideChoice > sides.size()) {
+                System.out.println("Invalid choice, please select a valid sauce.");
+            }
+        } while (sideChoice < 1 || sideChoice > sides.size());
+
+        Side removedSide = sides.get(sideChoice - 1);
+        sandwich.removeSide(removedSide);
+        System.out.println(removedSide + " removed.");
+    }
+
+    public static void removeSauce(SignatureSandwich sandwich, Scanner scanner) {
+        List<Sauce> sauces = sandwich.getSauces();
+        if (sauces.isEmpty()) {
+            System.out.println("There are no sauces to remove.");
+            return;
+        }
+
+        System.out.println("Select a sauce to remove:");
+        for (int i = 0; i < sauces.size(); i++) {
+            System.out.printf("\t%d) %s%n", i + 1, sauces.get(i));
+        }
+
+        int sauceChoice;
+        do {
+            System.out.print("Your choice: ");
+            sauceChoice = scanner.nextInt();
+            if (sauceChoice < 1 || sauceChoice > sauces.size()) {
+                System.out.println("Invalid choice, please select a valid sauce.");
+            }
+        } while (sauceChoice < 1 || sauceChoice > sauces.size());
+
+        Sauce removedSauce = sauces.get(sauceChoice - 1);
+        sandwich.removeSauce(removedSauce);
+        System.out.println(removedSauce + " removed.");
+    }
+
+    public static void removeTopping(SignatureSandwich sandwich, Scanner scanner) {
+        List<Topping> toppings = sandwich.getToppings();
+        if (toppings.isEmpty()) {
+            System.out.println("There are no toppings to remove.");
+            return;
+        }
+        System.out.println("Select a topping to remove:");
+        for (int i = 0; i < toppings.size(); i++) {
+            Topping topping = toppings.get(i);
+            if (topping instanceof MeatTopping meatTopping) {
+                System.out.printf("\t%d) %s%n", i + 1, meatTopping);
+            } else if (topping instanceof CheeseTopping cheeseTopping) {
+                System.out.printf("\t%d) %s%n", i + 1, cheeseTopping);
+            } else if (topping instanceof RegularTopping regularTopping) {
+                System.out.printf("\t%d) %s%n", i + 1, regularTopping);
+            }
+        }
+        int toppingChoice;
+        do {
+            System.out.print("Your choice: ");
+            toppingChoice = scanner.nextInt();
+            if (toppingChoice < 1 || toppingChoice > toppings.size()) {
+                System.out.println("Invalid choice, please select a valid topping.");
+            }
+        } while (toppingChoice < 1 || toppingChoice > toppings.size());
+
+        Topping toRemove = toppings.get(toppingChoice - 1);
+        sandwich.removeTopping(toRemove);
+        System.out.println(toRemove + " removed.");
     }
 
     private static int handleInput(Scanner scanner, int maxOption) {

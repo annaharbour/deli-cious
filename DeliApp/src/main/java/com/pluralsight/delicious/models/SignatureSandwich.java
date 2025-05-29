@@ -74,9 +74,37 @@ public class SignatureSandwich extends Sandwich {
         return SignatureSandwichType.values();
     }
 
-
     @Override
     public String getReceiptLine() {
-        return String.format("%s, ,%.2f", getSignatureSandwichName(), getPrice());
+
+        StringBuilder receiptItem = new StringBuilder();
+        receiptItem.append(size.getValue());
+        receiptItem.append(signatureSandwichName);
+        receiptItem.append(" on ").append(breadType.getValue()).append(" Bread");
+
+        StringBuilder receiptDetails = new StringBuilder();
+        for (Topping topping : toppings) {
+            receiptDetails.append(" | ");
+            if (topping instanceof MeatTopping meatTopping) {
+                receiptDetails.append(meatTopping);
+            } else if (topping instanceof CheeseTopping cheeseTopping) {
+                receiptDetails.append(cheeseTopping);
+            } else if (topping instanceof RegularTopping regularTopping) {
+                receiptDetails.append(regularTopping);
+            }
+
+        }
+        for (Sauce sauce : sauces) {
+            receiptDetails.append(" | ");
+            receiptDetails.append(sauce);
+
+        }
+        for (Side side : sides) {
+            receiptDetails.append(" | ");
+            receiptDetails.append("Side of ").append(side);
+        }
+        receiptDetails.append(toasted ? " | Toasted" : " | Not Toasted");
+
+        return String.format("%s, %s, %.2f", receiptItem, receiptDetails, getPrice());
     }
 }

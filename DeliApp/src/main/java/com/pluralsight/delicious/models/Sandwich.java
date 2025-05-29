@@ -147,7 +147,7 @@ public class Sandwich implements MenuItem {
 
         StringBuilder receiptDetails = new StringBuilder();
         for (Topping topping : toppings) {
-            receiptDetails.append(" - ");
+            receiptDetails.append(" | ");
             if (topping instanceof MeatTopping meatTopping) {
                 receiptDetails.append(meatTopping);
             } else if (topping instanceof CheeseTopping cheeseTopping) {
@@ -158,15 +158,15 @@ public class Sandwich implements MenuItem {
 
         }
         for (Sauce sauce : sauces) {
-            receiptDetails.append(" - ");
+            receiptDetails.append(" | ");
             receiptDetails.append(sauce);
 
         }
         for (Side side : sides) {
-            receiptDetails.append(" - ");
+            receiptDetails.append(" | ");
             receiptDetails.append("Side of ").append(side);
         }
-        receiptDetails.append(" - ");
+        receiptDetails.append(" | ");
         receiptDetails.append(toasted ? " | Toasted" : "Not Toasted");
 
         return String.format("%s, %s, %.2f", receiptItem, receiptDetails, getPrice());
