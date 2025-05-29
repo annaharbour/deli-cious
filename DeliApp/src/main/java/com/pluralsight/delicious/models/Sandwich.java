@@ -5,9 +5,7 @@ import java.util.List;
 
 public class Sandwich implements MenuItem {
     public enum SandwichSize {
-        FOUR_INCH("4\""),
-        EIGHT_INCH("8\""),
-        TWELVE_INCH("12\"");
+        FOUR_INCH("4\""), EIGHT_INCH("8\""), TWELVE_INCH("12\"");
 
         private final String sandwichSizeName;
 
@@ -21,10 +19,7 @@ public class Sandwich implements MenuItem {
     }
 
     public enum BreadType {
-        WHITE("White"),
-        WHOLE_GRAIN("Whole Grain"),
-        MULTIGRAIN("Multi-grain"),
-        RYE("Rye");
+        WHITE("White"), WHOLE_GRAIN("Whole Grain"), MULTIGRAIN("Multi-grain"), RYE("Rye");
 
         private final String breadTypeName;
 
@@ -48,8 +43,7 @@ public class Sandwich implements MenuItem {
     }
 
     public Sandwich(SandwichSize size, BreadType breadType, List<Topping> toppings, List<Sauce> sauces,
-                    List<Side> sides,
-                    boolean toasted) {
+                    List<Side> sides, boolean toasted) {
         this.size = size;
         this.breadType = breadType;
         this.toppings = (toppings != null) ? toppings : new ArrayList<>();
@@ -70,24 +64,24 @@ public class Sandwich implements MenuItem {
         this.toppings.add(topping);
     }
 
-    public void removeTopping(Topping topping) {
-        this.toppings.remove(topping);
+    public void removeTopping(String toppingString) {
+        this.toppings.removeIf(topping -> topping.toString().equalsIgnoreCase(toppingString));
     }
 
     public void addSauce(Sauce sauce) {
         this.sauces.add(sauce);
     }
 
-    public void removeSauce(Sauce sauce) {
-        this.sauces.remove(sauce);
+    public void removeSauce(String sauceString) {
+        this.sauces.removeIf(sauce -> sauce.toString().equalsIgnoreCase(sauceString));
     }
 
     public void addSide(Side side) {
         this.sides.add(side);
     }
 
-    public void removeSides(Side side) {
-        this.sides.remove(side);
+    public void removeSide(String sideString) {
+        this.sides.removeIf(side -> side.toString().equalsIgnoreCase(sideString));
     }
 
     public void setToasted(boolean toasted) {
