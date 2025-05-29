@@ -141,35 +141,41 @@ public class Sandwich implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        StringBuilder receiptItem = new StringBuilder();
-        receiptItem.append(size.getValue()).append("\" Sandwich on ");
-        receiptItem.append(breadType.getValue()).append(" Bread");
+        StringBuilder receipt = new StringBuilder();
 
-        StringBuilder receiptDetails = new StringBuilder();
+        // Format sandwich header with same spacing as ingredients
+        String sandwichHeader = String.format("\t%-25s %10s",
+                size.getValue() + " ON " + breadType.getValue().toUpperCase(),
+                String.format("$%.2f", getPrice()));
+        receipt.append(sandwichHeader).append("\n");
+
+        // Format each topping
         for (Topping topping : toppings) {
-            receiptDetails.append(" | ");
             if (topping instanceof MeatTopping meatTopping) {
-                receiptDetails.append(meatTopping);
+                receipt.append(String.format("\t%-25s %10s\n", meatTopping,
+                        String.format("$%.2f", meatTopping.getPrice(size))));
             } else if (topping instanceof CheeseTopping cheeseTopping) {
-                receiptDetails.append(cheeseTopping);
+                receipt.append(String.format("\t%-25s %10s\n", cheeseTopping,
+                        String.format("$%.2f", cheeseTopping.getPrice(size))));
             } else if (topping instanceof RegularTopping regularTopping) {
-                receiptDetails.append(regularTopping);
+                receipt.append(String.format("\t%-25s %10s\n", regularTopping, "$0.00"));
             }
-
         }
+
+        // Sauces
         for (Sauce sauce : sauces) {
-            receiptDetails.append(" | ");
-            receiptDetails.append(sauce);
-
+            receipt.append(String.format("\t%-25s %10s\n", sauce, "$0.00"));
         }
+
+        // Sides
         for (Side side : sides) {
-            receiptDetails.append(" | ");
-            receiptDetails.append("Side of ").append(side);
+            receipt.append(String.format("\t%-25s %10s\n", "Side of " + side, "$0.00"));
         }
-        receiptDetails.append(" | ");
-        receiptDetails.append(toasted ? " | Toasted" : "Not Toasted");
 
-        return String.format("%s, %s, %.2f", receiptItem, receiptDetails, getPrice());
+        // Toasting
+        receipt.append(String.format("\t%-25s %10s", toasted ? "Toasted" : "Not Toasted", "$0.00"));
+
+        return receipt.toString();
     }
 
     @Override

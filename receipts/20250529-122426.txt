@@ -1,0 +1,23 @@
+Order Timestamp: 2025-05-29 12:24:26
+----------------------------------------------------
+Customer Name: anna
+----------------------------------------------------
+
+ORDER SUMMARY
+
+	8" BLT ON WHITE                $9.00
+	Bacon                          $2.00
+	Lettuce                        $0.00
+	Guacamole                      $0.00
+	Tomatoes                       $0.00
+	Ranch                          $0.00
+	Not Toasted                    $0.00
+
+	8" ON MULTI-GRAIN              $9.10
+	Cheddar Cheese (++extra)       $2.10
+	Ketchup                        $0.00
+	Toasted                        $0.00
+
+
+----------------------------------------------------
+ORDER TOTAL: 	$18.10

@@ -1,0 +1,20 @@
+Order Timestamp: 2025-05-29 12:33:11
+----------------------------------------------------
+Customer Name: anna
+----------------------------------------------------
+
+ORDER SUMMARY
+
+	8" PHILLY CHEESE STEAK ON WHITE     $10.50
+	Steak                          $2.00
+	Provolone Cheese               $1.50
+	Peppers                        $0.00
+	Mushrooms                      $0.00
+	Onions                         $0.00
+	Mayo                           $0.00
+	Side of Au Jus                 $0.00
+	Toasted                        $0.00
+
+
+----------------------------------------------------
+ORDER TOTAL:                      $10.50
