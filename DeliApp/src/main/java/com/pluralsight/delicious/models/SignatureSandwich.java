@@ -10,9 +10,9 @@ public class SignatureSandwich extends Sandwich {
                 Sandwich.BreadType.WHITE,
                 List.of(
                         new MeatTopping(MeatTopping.MeatType.BACON, false),
-                        new RegularTopping(RegularTopping.FreeTopping.LETTUCE),
-                        new RegularTopping(RegularTopping.FreeTopping.GUACAMOLE),
-                        new RegularTopping(RegularTopping.FreeTopping.TOMATOES)
+                        new RegularTopping(RegularTopping.FreeTopping.LETTUCE, false),
+                        new RegularTopping(RegularTopping.FreeTopping.GUACAMOLE, false),
+                        new RegularTopping(RegularTopping.FreeTopping.TOMATOES, false)
                 ),
                 List.of(new Sauce(Sauce.SauceType.RANCH)),
                 List.of(),
@@ -25,9 +25,9 @@ public class SignatureSandwich extends Sandwich {
                 List.of(
                         new MeatTopping(MeatTopping.MeatType.STEAK, false),
                         new CheeseTopping(CheeseTopping.CheeseType.PROVOLONE, false),
-                        new RegularTopping(RegularTopping.FreeTopping.PEPPERS),
-                        new RegularTopping(RegularTopping.FreeTopping.MUSHROOMS),
-                        new RegularTopping(RegularTopping.FreeTopping.ONIONS)
+                        new RegularTopping(RegularTopping.FreeTopping.PEPPERS, false),
+                        new RegularTopping(RegularTopping.FreeTopping.MUSHROOMS, false),
+                        new RegularTopping(RegularTopping.FreeTopping.ONIONS, false)
                 ),
                 List.of(new Sauce(Sauce.SauceType.MAYO)),
                 List.of(new Side(Side.SideType.AU_JUS)),

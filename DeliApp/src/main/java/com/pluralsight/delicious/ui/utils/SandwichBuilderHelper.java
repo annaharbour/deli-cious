@@ -79,7 +79,18 @@ public class SandwichBuilderHelper {
             System.out.printf("\t%d) %s\n", i + 1, toppingOptions[i].getValue());
         }
         int choice = handleInput(scanner, toppingOptions.length);
-        sandwich.addTopping(new RegularTopping(toppingOptions[choice - 1]));
+        System.out.printf("Extra %s?\t1) Yes\t2) No\n", toppingOptions[choice - 1].getValue());
+        int extra;
+        do {
+            extra = scanner.nextInt();
+            if (extra == 1) {
+                sandwich.addTopping(new RegularTopping(toppingOptions[choice - 1], true));
+            } else if (extra == 2) {
+                sandwich.addTopping(new RegularTopping(toppingOptions[choice - 1], false));
+            } else {
+                PrintColored.printColored("Invalid choice, please try again.", "red");
+            }
+        } while (extra != 1 && extra != 2);
     }
 
     public static void chooseSauces(Scanner scanner, Sandwich sandwich) {

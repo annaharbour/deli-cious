@@ -24,9 +24,11 @@ public class RegularTopping extends Topping {
         }
     }
 
+    private final boolean extra;
 
-    public RegularTopping(FreeTopping freeTopping) {
+    public RegularTopping(FreeTopping freeTopping, boolean extra) {
         this.name = freeTopping.getValue();
+        this.extra = extra;
     }
 
     public static RegularTopping.FreeTopping[] getAllRegularToppings() {
@@ -35,7 +37,7 @@ public class RegularTopping extends Topping {
 
     @Override
     public String toString() {
-        return name;
+        return name + (extra ? "(++extra)" : " ");
     }
 
     @Override
