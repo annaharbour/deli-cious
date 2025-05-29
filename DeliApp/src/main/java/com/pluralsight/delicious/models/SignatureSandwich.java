@@ -15,7 +15,4 @@ public class SignatureSandwich extends Sandwich {
         return this.signatureSandwichName;
     }
 
-    public void setName(String signatureSandwichName) {
-        this.signatureSandwichName = signatureSandwichName;
-    }
 }

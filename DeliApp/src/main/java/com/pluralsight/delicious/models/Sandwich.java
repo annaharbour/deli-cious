@@ -70,12 +70,24 @@ public class Sandwich implements MenuItem {
         this.toppings.add(topping);
     }
 
+    public void removeTopping(Topping topping) {
+        this.toppings.remove(topping);
+    }
+
     public void addSauce(Sauce sauce) {
         this.sauces.add(sauce);
     }
 
+    public void removeSauce(Sauce sauce) {
+        this.sauces.remove(sauce);
+    }
+
     public void addSide(Side side) {
         this.sides.add(side);
+    }
+
+    public void removeSides(Side side) {
+        this.sides.remove(side);
     }
 
     public void setToasted(boolean toasted) {
