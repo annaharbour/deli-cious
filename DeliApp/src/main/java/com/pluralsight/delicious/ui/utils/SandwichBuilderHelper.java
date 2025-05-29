@@ -1,4 +1,4 @@
-package com.pluralsight.delicious.ui;
+package com.pluralsight.delicious.ui.utils;
 
 import com.pluralsight.delicious.models.*;
 
@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class SandwichBuilderHelper {
 
     public static void chooseBread(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         Sandwich.BreadType[] breadOptions = Sandwich.getAllBreadOptions();
         System.out.println("Select bread type:");
         for (int i = 0; i <= breadOptions.length - 1; i++) {
@@ -18,6 +19,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseSize(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         Sandwich.SandwichSize[] sizeOptions = Sandwich.getAllSizeOptions();
         System.out.println("Select sandwich size:");
         for (int i = 0; i <= sizeOptions.length - 1; i++) {
@@ -28,6 +30,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseMeat(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         MeatTopping.MeatType[] meatOptions = MeatTopping.getAllMeatOptions();
         System.out.println("Select meat:");
         for (int i = 0; i <= meatOptions.length - 1; i++) {
@@ -49,6 +52,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseCheese(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.getAllCheeseOptions();
         System.out.println("Select cheese:");
         for (int i = 0; i <= cheeseOptions.length - 1; i++) {
@@ -70,6 +74,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         RegularTopping.FreeTopping[] toppingOptions = RegularTopping.getAllRegularToppings();
         System.out.println("Select other toppings:");
         for (int i = 0; i <= toppingOptions.length - 1; i++) {
@@ -80,6 +85,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseSauces(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
         System.out.println("Select sauce:");
         for (int i = 0; i <= sauceOptions.length - 1; i++) {
@@ -90,6 +96,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseSides(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         System.out.println("Add Sides");
         Side.SideType[] sideOptions = Side.getAllSideOptions();
         for (int i = 0; i <= sideOptions.length - 1; i++) {
@@ -113,6 +120,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseToasted(Scanner scanner, Sandwich sandwich) {
+        ClearScreen.clearScreen();
         System.out.println("Would you like your sandwich toasted?");
         String[] toastOptions = {"Toast", "Don't Toast"};
         for (int i = 0; i <= toastOptions.length - 1; i++) {
@@ -124,6 +132,7 @@ public class SandwichBuilderHelper {
 
 
     public static void removeSide(SignatureSandwich sandwich, Scanner scanner) {
+        ClearScreen.clearScreen();
         List<Side> sides = sandwich.getSides();
         if (sides.isEmpty()) {
             System.out.println("There are no sides to remove.");
@@ -148,6 +157,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void removeSauce(SignatureSandwich sandwich, Scanner scanner) {
+        ClearScreen.clearScreen();
         List<Sauce> sauces = sandwich.getSauces();
         if (sauces.isEmpty()) {
             System.out.println("There are no sauces to remove.");
@@ -174,6 +184,7 @@ public class SandwichBuilderHelper {
     }
 
     public static void removeTopping(SignatureSandwich sandwich, Scanner scanner) {
+        ClearScreen.clearScreen();
         List<Topping> toppings = sandwich.getToppings();
         if (toppings.isEmpty()) {
             System.out.println("There are no toppings to remove.");

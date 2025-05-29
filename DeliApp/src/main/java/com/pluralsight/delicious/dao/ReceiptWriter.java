@@ -40,6 +40,7 @@ public class ReceiptWriter {
                 pw.println("ORDER SUMMARY");
                 currentOrder.getOrderItems().forEach(item -> {
                     pw.println(item.getReceiptLine());
+                    pw.println();
                 });
                 pw.println("----------------------------------------------------");
                 String total = String.format("$%.2f", currentOrder.getPrice());

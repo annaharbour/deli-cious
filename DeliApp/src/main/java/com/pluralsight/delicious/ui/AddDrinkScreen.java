@@ -2,12 +2,15 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Drink;
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
 
 import java.util.Scanner;
 
 public class AddDrinkScreen implements ScreenState {
     @Override
     public void display() {
+        ClearScreen.clearScreen();
+
         System.out.println("====== Order a Drink ======");
     }
 
@@ -29,7 +32,7 @@ public class AddDrinkScreen implements ScreenState {
         } while (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length);
 
         drink.setSize(drinkSizeOptions[drinkSizeChoice - 1]);
-
+        ClearScreen.clearScreen();
         System.out.println("What flavor drink would you like?");
         Drink.Flavor[] flavorOptions = Drink.getAllDrinkFlavorOptions();
         for (int i = 0; i <= flavorOptions.length - 1; i++) {
@@ -44,7 +47,7 @@ public class AddDrinkScreen implements ScreenState {
             }
         } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
         drink.setFlavor(flavorOptions[flavorChoice - 1]);
-//TODO: CLEAR SCREEN
+        ClearScreen.clearScreen();
         System.out.printf("Would you like to add a %s %s for $%.2f to your order?\n", drink.getSize(),
                 drink.getFlavor(), drink.getPrice());
         int confirmation;
@@ -55,6 +58,7 @@ public class AddDrinkScreen implements ScreenState {
             currentOrder.addToOrder(drink);
             System.out.printf("Adding a %s %s to your order\n", drink.getSize(), drink.getFlavor());
         }
+        ClearScreen.clearScreen();
         return new OrderScreen();
 
     }

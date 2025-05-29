@@ -1,12 +1,15 @@
 package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.*;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.SandwichBuilderHelper;
 
 import java.util.Scanner;
 
 public class CustomizeSandwichScreen implements ScreenState {
     @Override
     public void display() {
+        ClearScreen.clearScreen();
         System.out.println("====== BUILD YOUR SANDWICH ======");
     }
 
@@ -17,6 +20,8 @@ public class CustomizeSandwichScreen implements ScreenState {
         SandwichBuilderHelper.chooseBread(scanner, sandwich);
         int userChoice;
         do {
+            ClearScreen.clearScreen();
+            System.out.println("Add to your sandwich: ");
             String[] customSandwichOptions = {"1) Add Meat", "2) Add Cheese", "3) Add Other Toppings", "4) Add Sauce",
                     "5) Add Sides", "6) Continue", "0) Cancel"};
             for(String option : customSandwichOptions){
@@ -37,7 +42,7 @@ public class CustomizeSandwichScreen implements ScreenState {
                 default -> System.out.println("Choose a valid option");
             }
         } while (userChoice != 6);
-//TODO: clear screen here
+        ClearScreen.clearScreen();
         System.out.println("Here's your sandwich order");
         System.out.println(sandwich.getReceiptLine());
         System.out.println("\nDoes everything look ok?");

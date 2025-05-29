@@ -2,6 +2,7 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Chips;
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
 
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class AddChipsScreen implements ScreenState {
             }
         } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
         chips.setFlavor(flavorOptions[flavorChoice - 1]);
-
+        ClearScreen.clearScreen();
         System.out.printf("Would you like to add a bag of %s chips for $%.2f to your order?\n", chips.getFlavor(),
                 chips.getPrice());
         int confirmation;
@@ -39,6 +40,7 @@ public class AddChipsScreen implements ScreenState {
                 System.out.printf("\nAdding %s Chips to your order", chips.getFlavor());
             }
         } while (confirmation != 0 && confirmation != 1);
+        ClearScreen.clearScreen();
         return new OrderScreen();
     }
 }

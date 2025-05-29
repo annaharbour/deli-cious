@@ -2,37 +2,42 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.models.SignatureSandwich;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.SandwichBuilderHelper;
 
 import java.util.Scanner;
 
 public class SignatureSandwichesScreen implements ScreenState {
-    private final SignatureSandwich.SignatureSandwichType[] sandwichOptions =
-            SignatureSandwich.getAllSignatureSandwiches();
 
     @Override
     public void display() {
-        System.out.println("Here are our signature sandwiches:");
-        for (int i = 0; i < sandwichOptions.length; i++) {
-            System.out.printf("\t%d) %s\n", i + 1, sandwichOptions[i].getSandwich().getSignatureSandwichName());
-        }
+        ClearScreen.clearScreen();
+        System.out.println("========= SIGNATURE SANDWICHES ===========");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
+        SignatureSandwich.SignatureSandwichType[] sandwichOptions =
+                SignatureSandwich.getAllSignatureSandwiches();
+        System.out.println("Select an option from our signature sandwiches:");
+        for (int i = 0; i < sandwichOptions.length; i++) {
+            System.out.printf("\t%d) %s\n", i + 1, sandwichOptions[i].getSandwich().getSignatureSandwichName());
+        }
         int input;
         input = scanner.nextInt();
         if (input > 0 && input <= sandwichOptions.length) {
-
             SignatureSandwich original = sandwichOptions[input - 1].getSandwich();
             SignatureSandwich selected = new SignatureSandwich(original);
-            System.out.println("You have selected :\n" + selected.getOrderLine());
-            String[] signatureSandwichOptions = {"1) Order", "2) Customize", "0)Cancel"};
+            ClearScreen.clearScreen();
+            System.out.println("You have selected :\n" + selected.getReceiptLine());
+            String[] signatureSandwichOptions = {"1) Order", "2) Customize", "0) Cancel"};
             for (String option : signatureSandwichOptions) {
                 System.out.printf("\n\t%s %s", option, selected.getSignatureSandwichName());
             }
+            System.out.println();
             input = scanner.nextInt();
             switch (input) {
-                case 0 -> System.out.println("Ok!");
+                case 0 -> System.out.println("No problem!");
                 case 1 -> currentOrder.addToOrder(selected);
                 case 2 -> {
                     SignatureSandwich customized = customizeSandwich(selected, scanner);
@@ -46,14 +51,17 @@ public class SignatureSandwichesScreen implements ScreenState {
     }
 
     private static SignatureSandwich customizeSandwich(SignatureSandwich sandwich, Scanner scanner) {
+
         String[] options = {"Add Meat", "Add Cheese", "Add Toppings", "Add Sauce", "Add Side", "Change Size",
                 "Change Bread", "Change Toasted", "Remove Topping", "Remove Sauce",
                 "Remove Side", "Done"};
         int choice;
         do {
-            sandwich.getOrderLine();
+            sandwich.getReceiptLine();
+            ClearScreen.clearScreen();
+            System.out.println("Customize your sandwich");
             for (int i = 0; i <= options.length - 1; i++) {
-                System.out.printf("\n\t%d) %s\n", i + 1, options[i]);
+                System.out.printf("\t%d) %s\n", i + 1, options[i]);
             }
             choice = scanner.nextInt();
             switch (choice) {

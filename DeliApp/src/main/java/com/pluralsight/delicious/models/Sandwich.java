@@ -120,6 +120,17 @@ public class Sandwich implements MenuItem {
         return BreadType.values();
     }
 
+    public double getBasePrice() {
+        double basePrice = 0;
+
+        switch (size) {
+            case FOUR_INCH -> basePrice = 5.50;
+            case EIGHT_INCH -> basePrice = 7.00;
+            case TWELVE_INCH -> basePrice = 8.50;
+        }
+
+        return basePrice;
+    }
 
     @Override
     public double getPrice() {
@@ -143,11 +154,12 @@ public class Sandwich implements MenuItem {
     public String getReceiptLine() {
         StringBuilder receipt = new StringBuilder();
 
-        // Format sandwich header with same spacing as ingredients
         String sandwichHeader = String.format("\t%-25s %10s",
                 size.getValue() + " ON " + breadType.getValue().toUpperCase(),
                 String.format("$%.2f", getPrice()));
         receipt.append(sandwichHeader).append("\n");
+        receipt.append(String.format("\t%-25s %10s\n", "Base Price", String.format("$%.2f",
+                getBasePrice())));
 
         // Format each topping
         for (Topping topping : toppings) {

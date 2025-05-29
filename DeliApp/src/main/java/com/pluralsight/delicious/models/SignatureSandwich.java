@@ -78,34 +78,33 @@ public class SignatureSandwich extends Sandwich {
     public String getReceiptLine() {
         StringBuilder receipt = new StringBuilder();
 
-        // Format sandwich header with same spacing as ingredients
         String sandwichHeader = String.format("\t%-25s %10s",
                 size.getValue() + " " + signatureSandwichName.toUpperCase() + " ON " + breadType.getValue().toUpperCase(),
                 String.format("$%.2f", getPrice()));
         receipt.append(sandwichHeader).append("\n");
+        receipt.append(String.format("\t%-25s %10s\n", "Base Price", String.format("$%.2f",
+                getBasePrice())));
 
-        // Format each topping
         for (Topping topping : toppings) {
             if (topping instanceof MeatTopping meatTopping) {
-                receipt.append(String.format("\t%-25s %10s\n", meatTopping, String.format("$%.2f", meatTopping.getPrice(size))));
+                receipt.append(String.format("\t%-25s %10s\n", meatTopping,
+                        String.format("$%.2f", meatTopping.getPrice(size))));
             } else if (topping instanceof CheeseTopping cheeseTopping) {
-                receipt.append(String.format("\t%-25s %10s\n", cheeseTopping, String.format("$%.2f", cheeseTopping.getPrice(size))));
+                receipt.append(String.format("\t%-25s %10s\n", cheeseTopping,
+                        String.format("$%.2f", cheeseTopping.getPrice(size))));
             } else if (topping instanceof RegularTopping regularTopping) {
                 receipt.append(String.format("\t%-25s %10s\n", regularTopping, "$0.00"));
             }
         }
 
-        // Sauces
         for (Sauce sauce : sauces) {
             receipt.append(String.format("\t%-25s %10s\n", sauce, "$0.00"));
         }
 
-        // Sides
         for (Side side : sides) {
             receipt.append(String.format("\t%-25s %10s\n", "Side of " + side, "$0.00"));
         }
 
-        // Toasting
         receipt.append(String.format("\t%-25s %10s", toasted ? "Toasted" : "Not Toasted", "$0.00"));
 
         return receipt.toString();
