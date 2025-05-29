@@ -2,6 +2,7 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.PrintColored;
 
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class OrderScreen implements ScreenState {
     @Override
     public void display() {
         ClearScreen.clearScreen();
-        System.out.println("========= Place an Order ========");
+        PrintColored.printColored("😋========= Place an Order ========😋", "magenta");
     }
 
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
@@ -29,7 +30,7 @@ public class OrderScreen implements ScreenState {
             case 3 -> new AddChipsScreen();
             case 4 -> new CheckoutScreen();
             default -> {
-                System.out.println("Invalid input. Try again");
+                PrintColored.printColored("Invalid input. Try again", "red");
                 yield this;
             }
         };

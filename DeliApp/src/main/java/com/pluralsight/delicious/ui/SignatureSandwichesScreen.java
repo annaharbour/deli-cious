@@ -3,6 +3,7 @@ package com.pluralsight.delicious.ui;
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.models.SignatureSandwich;
 import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.PrintColored;
 import com.pluralsight.delicious.ui.utils.SandwichBuilderHelper;
 
 import java.util.Scanner;
@@ -12,14 +13,14 @@ public class SignatureSandwichesScreen implements ScreenState {
     @Override
     public void display() {
         ClearScreen.clearScreen();
-        System.out.println("========= SIGNATURE SANDWICHES ===========");
+        PrintColored.printColored("\uD83E\uDD64========= SIGNATURE SANDWICHES ===========\uD83E\uDD64", "magenta");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         SignatureSandwich.SignatureSandwichType[] sandwichOptions =
                 SignatureSandwich.getAllSignatureSandwiches();
-        System.out.println("Select an option from our signature sandwiches:");
+        PrintColored.printColored("Select an option from our signature sandwiches:", "yellow");
         for (int i = 0; i < sandwichOptions.length; i++) {
             System.out.printf("\t%d) %s\n", i + 1, sandwichOptions[i].getSandwich().getSignatureSandwichName());
         }
@@ -29,7 +30,7 @@ public class SignatureSandwichesScreen implements ScreenState {
             SignatureSandwich original = sandwichOptions[input - 1].getSandwich();
             SignatureSandwich selected = new SignatureSandwich(original);
             ClearScreen.clearScreen();
-            System.out.println("You have selected :\n" + selected.getReceiptLine());
+            PrintColored.printColored("You have selected :\n" + selected.getReceiptLine(), "green");
             String[] signatureSandwichOptions = {"1) Order", "2) Customize", "0) Cancel"};
             for (String option : signatureSandwichOptions) {
                 System.out.printf("\n\t%s %s", option, selected.getSignatureSandwichName());
@@ -37,29 +38,34 @@ public class SignatureSandwichesScreen implements ScreenState {
             System.out.println();
             input = scanner.nextInt();
             switch (input) {
-                case 0 -> System.out.println("No problem!");
+                case 0 -> PrintColored.printColored("No problem!", "yellow");
                 case 1 -> currentOrder.addToOrder(selected);
                 case 2 -> {
                     SignatureSandwich customized = customizeSandwich(selected, scanner);
                     currentOrder.addToOrder(customized);
                 }
-                case 3 -> System.out.println("Canceling sandwich order...");
-                default -> System.out.println("Invalid Option");
+                case 3 -> PrintColored.printColored("Canceling sandwich order...", "yellow");
+                default -> PrintColored.printColored("Invalid Option", "red");
             }
         }
         return new OrderScreen();
     }
 
     private static SignatureSandwich customizeSandwich(SignatureSandwich sandwich, Scanner scanner) {
-
-        String[] options = {"Add Meat", "Add Cheese", "Add Toppings", "Add Sauce", "Add Side", "Change Size",
-                "Change Bread", "Change Toasted", "Remove Topping", "Remove Sauce",
-                "Remove Side", "Done"};
+        String[] options = {"\uD83E\uDD69 Add Meat", "\uD83E\uDDC0 Add Cheese", "\uD83E\uDD51 Add Toppings", "\uD83E" +
+                "\uDD6B Add " +
+                "Sauce", "\uD83E\uDD63 Add " +
+                "Side", "➕➖ Change " +
+                "Size",
+                "\uD83C\uDF5E Change Bread", "\uD83D\uDD25 Change Toasted", "\uD83E\uDD53 Remove Topping", "\uD83E" +
+                "\uDD6B Remove " +
+                "Sauce",
+                "\uD83E\uDD63 Remove Side", "✅ Done"};
         int choice;
         do {
             sandwich.getReceiptLine();
             ClearScreen.clearScreen();
-            System.out.println("Customize your sandwich");
+            PrintColored.printColored("Customize your sandwich", "yellow");
             for (int i = 0; i <= options.length - 1; i++) {
                 System.out.printf("\t%d) %s\n", i + 1, options[i]);
             }

@@ -2,23 +2,25 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.PrintColored;
 
 import java.util.Scanner;
 
 public class AddSandwichScreen implements ScreenState {
-    private final String[] options = {"1) Create Custom Sandwich", "2) View Signature Sandwiches"};
 
     @Override
     public void display() {
         ClearScreen.clearScreen();
-        System.out.println("What kind of sandwich would you like to order?");
-        for(String option: options){
-            System.out.println("\t" + option);
-        }
+        PrintColored.printColored("\uD83E\uDD6A====== SANDWICHES ======\uD83E\uDD6A", "magenta");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
+        PrintColored.printColored("What kind of sandwich would you like to order?", "yellow");
+        String[] options = {"1) Create Custom Sandwich", "2) View Signature Sandwiches"};
+        for(String option: options){
+            System.out.println("\t" + option);
+        }
         int input = scanner.nextInt();
         return switch (input) {
             case 1 -> {
@@ -30,7 +32,7 @@ public class AddSandwichScreen implements ScreenState {
                 yield new SignatureSandwichesScreen();
             }
             default -> {
-                System.out.println("Invalid selection");
+                PrintColored.printColored("Invalid selection", "red");
                 ClearScreen.clearScreen();
                 yield this;
             }

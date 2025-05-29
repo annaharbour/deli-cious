@@ -3,6 +3,7 @@ package com.pluralsight.delicious.ui;
 import com.pluralsight.delicious.models.Drink;
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.PrintColored;
 
 import java.util.Scanner;
 
@@ -11,29 +12,28 @@ public class AddDrinkScreen implements ScreenState {
     public void display() {
         ClearScreen.clearScreen();
 
-        System.out.println("====== Order a Drink ======");
+        PrintColored.printColored("\uD83E\uDD64====== Order a Drink ======\uD83E\uDD64", "magenta");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         Drink drink = new Drink();
-        System.out.println("What size drink would you like?");
+        PrintColored.printColored("What size drink would you like?","yellow");
         Drink.Size[] drinkSizeOptions = Drink.getAllDrinkSizeOptions();
         for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, drinkSizeOptions[i].getValue());
         }
-        System.out.println();
         int drinkSizeChoice;
         do {
             drinkSizeChoice = scanner.nextInt();
             if (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length) {
-                System.out.println("Invalid choice, please select a valid size option.");
+                PrintColored.printColored("Invalid choice, please select a valid size option.", "red");
             }
         } while (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length);
 
         drink.setSize(drinkSizeOptions[drinkSizeChoice - 1]);
         ClearScreen.clearScreen();
-        System.out.println("What flavor drink would you like?");
+        PrintColored.printColored("What flavor drink would you like?", "yellow");
         Drink.Flavor[] flavorOptions = Drink.getAllDrinkFlavorOptions();
         for (int i = 0; i <= flavorOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, flavorOptions[i].getValue());
@@ -43,7 +43,7 @@ public class AddDrinkScreen implements ScreenState {
         do {
             flavorChoice = scanner.nextInt();
             if (flavorChoice < 1 || flavorChoice > flavorOptions.length) {
-                System.out.println("Invalid choice, please select a valid flavor option.");
+                PrintColored.printColored("Invalid choice, please select a valid flavor option.", "red");
             }
         } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
         drink.setFlavor(flavorOptions[flavorChoice - 1]);

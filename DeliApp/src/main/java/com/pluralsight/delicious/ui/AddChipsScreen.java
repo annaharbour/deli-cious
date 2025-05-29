@@ -3,19 +3,21 @@ package com.pluralsight.delicious.ui;
 import com.pluralsight.delicious.models.Chips;
 import com.pluralsight.delicious.models.Order;
 import com.pluralsight.delicious.ui.utils.ClearScreen;
+import com.pluralsight.delicious.ui.utils.PrintColored;
 
 import java.util.Scanner;
 
 public class AddChipsScreen implements ScreenState {
     @Override
     public void display() {
-        System.out.println("Would you like to add chips for $1.50?");
+        ClearScreen.clearScreen();
+        PrintColored.printColored("🥔====== Chips ======🥔", "magenta");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         Chips chips = new Chips();
-        System.out.println("What flavor chips would you like?");
+        PrintColored.printColored("What flavor chips would you like?", "yellow");
         Chips.Flavor[] flavorOptions = Chips.getAllChipFlavors();
         for (int i = 0; i <= flavorOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, flavorOptions[i].getValue());
@@ -24,7 +26,7 @@ public class AddChipsScreen implements ScreenState {
         do {
             flavorChoice = scanner.nextInt();
             if (flavorChoice < 1 || flavorChoice > flavorOptions.length) {
-                System.out.println("Invalid choice, please select a valid flavor option.");
+                PrintColored.printColored("Invalid choice, please select a valid flavor option.", "red");
             }
         } while (flavorChoice < 1 || flavorChoice > flavorOptions.length);
         chips.setFlavor(flavorOptions[flavorChoice - 1]);

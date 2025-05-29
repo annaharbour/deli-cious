@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class SandwichBuilderHelper {
 
     public static void chooseBread(Scanner scanner, Sandwich sandwich) {
-        ClearScreen.clearScreen();
         Sandwich.BreadType[] breadOptions = Sandwich.getAllBreadOptions();
         System.out.println("Select bread type:");
         for (int i = 0; i <= breadOptions.length - 1; i++) {
@@ -19,7 +18,6 @@ public class SandwichBuilderHelper {
     }
 
     public static void chooseSize(Scanner scanner, Sandwich sandwich) {
-        ClearScreen.clearScreen();
         Sandwich.SandwichSize[] sizeOptions = Sandwich.getAllSizeOptions();
         System.out.println("Select sandwich size:");
         for (int i = 0; i <= sizeOptions.length - 1; i++) {
@@ -32,7 +30,7 @@ public class SandwichBuilderHelper {
     public static void chooseMeat(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
         MeatTopping.MeatType[] meatOptions = MeatTopping.getAllMeatOptions();
-        System.out.println("Select meat:");
+        PrintColored.printColored("Select meat:", "yellow");
         for (int i = 0; i <= meatOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, meatOptions[i].getValue());
         }
@@ -46,7 +44,7 @@ public class SandwichBuilderHelper {
             } else if (extra == 2) {
                 sandwich.addTopping(new MeatTopping(meatOptions[choice - 1], false));
             } else {
-                System.out.println("Invalid choice, please try again.");
+                PrintColored.printColored("Invalid choice, please try again.", "red");
             }
         } while (extra != 1 && extra != 2);
     }
@@ -54,7 +52,7 @@ public class SandwichBuilderHelper {
     public static void chooseCheese(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
         CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.getAllCheeseOptions();
-        System.out.println("Select cheese:");
+        PrintColored.printColored("Select cheese:", "yellow");
         for (int i = 0; i <= cheeseOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, cheeseOptions[i].getValue());
         }
@@ -68,7 +66,7 @@ public class SandwichBuilderHelper {
             } else if (extra == 2) {
                 sandwich.addTopping(new CheeseTopping(cheeseOptions[choice - 1], false));
             } else {
-                System.out.println("Invalid choice, please try again.");
+                PrintColored.printColored("Invalid choice, please try again.", "red");
             }
         } while (extra != 1 && extra != 2);
     }
@@ -76,7 +74,7 @@ public class SandwichBuilderHelper {
     public static void chooseVeggies(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
         RegularTopping.FreeTopping[] toppingOptions = RegularTopping.getAllRegularToppings();
-        System.out.println("Select other toppings:");
+        PrintColored.printColored("Select other toppings:", "yellow");
         for (int i = 0; i <= toppingOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, toppingOptions[i].getValue());
         }
@@ -87,7 +85,7 @@ public class SandwichBuilderHelper {
     public static void chooseSauces(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
         Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
-        System.out.println("Select sauce:");
+        PrintColored.printColored("Select sauce:", "yellow");
         for (int i = 0; i <= sauceOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, sauceOptions[i].getValue());
         }
@@ -97,7 +95,7 @@ public class SandwichBuilderHelper {
 
     public static void chooseSides(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
-        System.out.println("Add Sides");
+        PrintColored.printColored("Add Sides", "yellow");
         Side.SideType[] sideOptions = Side.getAllSideOptions();
         for (int i = 0; i <= sideOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, sideOptions[i].getValue());
@@ -107,7 +105,7 @@ public class SandwichBuilderHelper {
             case 1 -> sandwich.addSide(new Side(sideOptions[sideChoice - 1]));
             case 2 -> {
                 Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
-                System.out.println("Select a sauce as a side:");
+                PrintColored.printColored("Select a sauce as a side:", "yellow");
                 for (int i = 0; i < sauceOptions.length; i++) {
                     System.out.printf("\t%d) %s", i + 1, sauceOptions[i].getValue());
                 }
@@ -115,13 +113,13 @@ public class SandwichBuilderHelper {
                 int sauceChoice = handleInput(scanner, sauceOptions.length);
                 sandwich.addSide(new Side(Side.SideType.SAUCE, new Sauce(sauceOptions[sauceChoice - 1])));
             }
-            default -> System.out.println("Invalid choice, please select a valid side option.");
+            default -> PrintColored.printColored("Invalid choice, please select a valid side option.", "red");
         }
     }
 
     public static void chooseToasted(Scanner scanner, Sandwich sandwich) {
         ClearScreen.clearScreen();
-        System.out.println("Would you like your sandwich toasted?");
+        PrintColored.printColored("Would you like your sandwich toasted?", "yellow");
         String[] toastOptions = {"Toast", "Don't Toast"};
         for (int i = 0; i <= toastOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, toastOptions[i]);
@@ -135,36 +133,36 @@ public class SandwichBuilderHelper {
         ClearScreen.clearScreen();
         List<Side> sides = sandwich.getSides();
         if (sides.isEmpty()) {
-            System.out.println("There are no sides to remove.");
+            PrintColored.printColored("There are no sides to remove.", "yellow");
             return;
         }
-        System.out.println("Select a side to remove:");
+        PrintColored.printColored("Select a side to remove:", "yellow");
         for (int i = 0; i < sides.size(); i++) {
             System.out.printf("\t%d) %s%n", i + 1, sides.get(i));
         }
         int sideChoice;
         do {
-            System.out.print("Your choice: ");
+            PrintColored.printColored("Your choice: ", "yellow");
             sideChoice = scanner.nextInt();
             if (sideChoice < 1 || sideChoice > sides.size()) {
-                System.out.println("Invalid choice, please select a valid sauce.");
+                PrintColored.printColored("Invalid choice, please select a valid sauce.", "red");
             }
         } while (sideChoice < 1 || sideChoice > sides.size());
 
         Side removedSide = sides.get(sideChoice - 1);
         sandwich.removeSide(removedSide);
-        System.out.println(removedSide + " removed.");
+        PrintColored.printColored(removedSide + " removed.", "green");
     }
 
     public static void removeSauce(SignatureSandwich sandwich, Scanner scanner) {
         ClearScreen.clearScreen();
         List<Sauce> sauces = sandwich.getSauces();
         if (sauces.isEmpty()) {
-            System.out.println("There are no sauces to remove.");
+            PrintColored.printColored("There are no sauces to remove.", "yellow");
             return;
         }
 
-        System.out.println("Select a sauce to remove:");
+        PrintColored.printColored("Select a sauce to remove:", "yellow");
         for (int i = 0; i < sauces.size(); i++) {
             System.out.printf("\t%d) %s%n", i + 1, sauces.get(i));
         }
@@ -174,7 +172,7 @@ public class SandwichBuilderHelper {
             System.out.print("Your choice: ");
             sauceChoice = scanner.nextInt();
             if (sauceChoice < 1 || sauceChoice > sauces.size()) {
-                System.out.println("Invalid choice, please select a valid sauce.");
+                PrintColored.printColored("Invalid choice, please select a valid sauce.", "red");
             }
         } while (sauceChoice < 1 || sauceChoice > sauces.size());
 
@@ -187,7 +185,7 @@ public class SandwichBuilderHelper {
         ClearScreen.clearScreen();
         List<Topping> toppings = sandwich.getToppings();
         if (toppings.isEmpty()) {
-            System.out.println("There are no toppings to remove.");
+            PrintColored.printColored("There are no toppings to remove.", "yellow");
             return;
         }
         System.out.println("Select a topping to remove:");
@@ -212,7 +210,7 @@ public class SandwichBuilderHelper {
 
         Topping toRemove = toppings.get(toppingChoice - 1);
         sandwich.removeTopping(toRemove);
-        System.out.println(toRemove + " removed.");
+        PrintColored.printColored(toRemove + " removed.", "green");
     }
 
     private static int handleInput(Scanner scanner, int maxOption) {
@@ -221,10 +219,10 @@ public class SandwichBuilderHelper {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (choice < 1 || choice > maxOption) {
-                    System.out.println("Invalid choice. Try again.");
+                    PrintColored.printColored("Invalid choice. Try again.", "red");
                 }
             } else {
-                System.out.println("Please enter a valid number.");
+                PrintColored.printColored("Please enter a valid number.", "red");
                 scanner.next();
             }
         }
