@@ -32,11 +32,11 @@ public class Sandwich implements MenuItem {
         }
     }
 
-    private SandwichSize size;
-    private BreadType breadType;
-    private List<Topping> toppings = new ArrayList<>();
-    private List<Sauce> sauces = new ArrayList<>();
-    private List<Side> sides = new ArrayList<>();
+    protected SandwichSize size;
+    protected BreadType breadType;
+    protected List<Topping> toppings = new ArrayList<>();
+    protected List<Sauce> sauces = new ArrayList<>();
+    protected List<Side> sides = new ArrayList<>();
     boolean toasted;
 
     public Sandwich() {
@@ -60,12 +60,16 @@ public class Sandwich implements MenuItem {
         this.breadType = breadType;
     }
 
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
     public void addTopping(Topping topping) {
         this.toppings.add(topping);
     }
 
-    public void removeTopping(String toppingString) {
-        this.toppings.removeIf(topping -> topping.toString().equalsIgnoreCase(toppingString));
+    public void removeTopping(Topping toppingToRemove) {
+        this.toppings.removeIf(topping -> topping == toppingToRemove);
     }
 
     public void addSauce(Sauce sauce) {

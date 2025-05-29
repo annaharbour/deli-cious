@@ -1,5 +1,6 @@
 package com.pluralsight.delicious.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SignatureSandwich extends Sandwich {
@@ -11,14 +12,26 @@ public class SignatureSandwich extends Sandwich {
         this.signatureSandwichName = signatureSandwichName;
     }
 
+        // Copy constructor
+        public SignatureSandwich(SignatureSandwich original) {
+            this.size = original.size;
+            this.breadType = original.breadType;
+            this.toppings = new ArrayList<>(original.toppings);
+            this.sauces = new ArrayList<>(original.sauces);
+            this.sides = new ArrayList<>(original.sides);
+            this.toasted = original.toasted;
+            this.signatureSandwichName = original.signatureSandwichName;
+        }
+
+
     public String getSignatureSandwichName() {
         return this.signatureSandwichName;
     }
 
-    @Override
-    public String getOrderLine() {
-        return String.format("%s: $%.2f", getSignatureSandwichName(), getPrice());
-    }
+//    @Override
+//    public String getOrderLine() {
+//        return String.format("%s: $%.2f", getSignatureSandwichName(), getPrice());
+//    }
 
     @Override
     public String getReceiptLine() {

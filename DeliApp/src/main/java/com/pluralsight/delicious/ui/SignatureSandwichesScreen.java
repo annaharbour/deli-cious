@@ -61,8 +61,7 @@ public class SignatureSandwichesScreen implements ScreenState {
         int input;
         input = scanner.nextInt();
         if (input > 0 && input <= signatureSandwiches.size()) {
-            SignatureSandwich selected = signatureSandwiches.get(input - 1);
-            System.out.println("You have selected :\n" + selected.getOrderLine());
+            SignatureSandwich selected = new SignatureSandwich(signatureSandwiches.get(input - 1));            System.out.println("You have selected :\n" + selected.getOrderLine());
             System.out.printf("Choose From the Following:\n\t1)Order %s?\n\t2) Customize %s\n\t3) Cancel",
                     selected.getSignatureSandwichName(), selected.getSignatureSandwichName());
             input = scanner.nextInt();
@@ -84,6 +83,7 @@ public class SignatureSandwichesScreen implements ScreenState {
                 "Remove Side", "Done"};
         int choice;
         do {
+            sandwich.getOrderLine();
             for (int i = 0; i <= options.length - 1; i++) {
                 System.out.printf("\n\t%d) %s\n", i + 1, options[i]);
             }
@@ -97,28 +97,55 @@ public class SignatureSandwichesScreen implements ScreenState {
                 case 6 -> SandwichBuilderHelper.chooseSize(scanner, sandwich);
                 case 7 -> SandwichBuilderHelper.chooseBread(scanner, sandwich);
                 case 8 -> SandwichBuilderHelper.chooseToasted(scanner, sandwich);
-                case 10 -> {
-                    scanner.next();
-                    String toppingName = scanner.nextLine();
-                    sandwich.removeTopping(toppingName);
+                case 9 -> {
+                    List<Topping> toppings = sandwich.getToppings();
+
+                    if (toppings.isEmpty()) {
+                        System.out.println("There are no toppings to remove.");
+                        break;
+                    }
+
+                    System.out.println("Select a topping to remove:");
+                    for (int i = 0; i < toppings.size(); i++) {
+                        Topping topping = toppings.get(i);
+                        String name = (topping instanceof MeatTopping) ? topping.toString()
+                                : (topping instanceof CheeseTopping) ? topping.toString()
+                                : (topping instanceof RegularTopping) ? topping.toString()
+                                : "Unknown";
+                        System.out.printf("\t%d) %s%n", i + 1, name);
+                    }
+
+                    int toppingChoice;
+                    do {
+                        System.out.print("Your choice: ");
+                        toppingChoice = scanner.nextInt();
+                        if (toppingChoice < 1 || toppingChoice > toppings.size()) {
+                            System.out.println("Invalid choice, please select a valid topping.");
+                        }
+                    } while (toppingChoice < 1 || toppingChoice > toppings.size());
+
+                    Topping toRemove = toppings.get(toppingChoice - 1);
+                    sandwich.removeTopping(toRemove);
+                    System.out.println(toRemove + " removed.");
                 }
-                case 11 -> {
+                case 10 -> {
                     scanner.next();
                     String sauceName = scanner.nextLine();
                     sandwich.removeSauce(sauceName);
                 }
-                case 12 -> {
+                case 11 -> {
                     scanner.next();
                     String sideName = scanner.nextLine();
                     sandwich.removeSide(sideName);
                 }
-                case 13 -> {
+                case 12 -> {
                     System.out.println("Adding Sandwich");
                     System.out.println(sandwich.getOrderLine());
                     return sandwich;
                 }
                 default -> System.out.println("Invalid option");
             }
-        } while (true);
+        }
+        while (true);
     }
 }
