@@ -45,9 +45,9 @@ public class Chips implements MenuItem {
         return Chips.Flavor.values();
     }
 
-    @Override
     public String getReceiptLine() {
-        return String.format("Chips,2.5oz Bag %s,%.2f,", getFlavor(), getPrice());
+        return String.format("\t%-25s %10s",flavor.getValue() + " Chips", String.format("$%.2f",
+                getPrice()));
     }
 
     @Override
