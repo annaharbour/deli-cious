@@ -46,12 +46,14 @@ public class Chips implements MenuItem {
     }
 
     public String getReceiptLine() {
-        return String.format("\t%-25s %10s",flavor.getValue() + " Chips", String.format("$%.2f",
+        return String.format("\t%-25s %10s",flavor.getValue().toUpperCase() + " CHIPS", String.format("$%.2f",
                 getPrice()));
     }
 
     @Override
     public String getOrderLine() {
-        return String.format("Chips: $%.2f,", getPrice());
+//        return String.format("Chips: $%.2f,", getPrice());
+        return String.format("\t%-25s %10s",flavor.getValue() + " Chips", String.format("$%.2f",
+                getPrice()));
     }
 }

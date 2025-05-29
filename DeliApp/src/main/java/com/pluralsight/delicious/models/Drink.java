@@ -81,7 +81,9 @@ public class Drink implements MenuItem {
 
     @Override
     public String getReceiptLine() {
-        return String.format("\t%-25s %10s", size.getValue() + " Drink - " + flavor.getValue(), String.format("$%.2f",
+        return String.format("\t%-25s %10s", size.getValue().toUpperCase() + " " + flavor.getValue().toUpperCase(),
+                String.format(
+                "$%.2f",
                 getPrice()));
     }
 

@@ -11,7 +11,7 @@ public class SandwichBuilderHelper {
         Sandwich.BreadType[] breadOptions = Sandwich.getAllBreadOptions();
         System.out.println("Select bread type:");
         for (int i = 0; i <= breadOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, breadOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, breadOptions[i].getValue());
         }
         int choice = handleInput(scanner, breadOptions.length);
         sandwich.setBreadType(breadOptions[choice - 1]);
@@ -21,7 +21,7 @@ public class SandwichBuilderHelper {
         Sandwich.SandwichSize[] sizeOptions = Sandwich.getAllSizeOptions();
         System.out.println("Select sandwich size:");
         for (int i = 0; i <= sizeOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, sizeOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, sizeOptions[i].getValue());
         }
         int choice = handleInput(scanner, sizeOptions.length);
         sandwich.setSandwichSize(sizeOptions[choice - 1]);
@@ -31,10 +31,10 @@ public class SandwichBuilderHelper {
         MeatTopping.MeatType[] meatOptions = MeatTopping.getAllMeatOptions();
         System.out.println("Select meat:");
         for (int i = 0; i <= meatOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, meatOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, meatOptions[i].getValue());
         }
         int choice = handleInput(scanner, meatOptions.length);
-        System.out.printf("Extra %s?\n\t1) Yes\n\t2) No\n", meatOptions[choice - 1].getValue());
+        System.out.printf("Extra %s?\t1) Yes\t2) No\n", meatOptions[choice - 1].getValue());
         int extra;
         do {
             extra = scanner.nextInt();
@@ -52,10 +52,10 @@ public class SandwichBuilderHelper {
         CheeseTopping.CheeseType[] cheeseOptions = CheeseTopping.getAllCheeseOptions();
         System.out.println("Select cheese:");
         for (int i = 0; i <= cheeseOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, cheeseOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, cheeseOptions[i].getValue());
         }
         int choice = handleInput(scanner, cheeseOptions.length);
-        System.out.printf("Would you like to add extra %s?\n\t1) Yes\n\t2) No\n", cheeseOptions[choice - 1].getValue());
+        System.out.printf("Would you like to add extra %s?\t1) Yes\t2) No\n", cheeseOptions[choice - 1].getValue());
         int extra;
         do {
             extra = scanner.nextInt();
@@ -73,7 +73,7 @@ public class SandwichBuilderHelper {
         RegularTopping.FreeTopping[] toppingOptions = RegularTopping.getAllRegularToppings();
         System.out.println("Select other toppings:");
         for (int i = 0; i <= toppingOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, toppingOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, toppingOptions[i].getValue());
         }
         int choice = handleInput(scanner, toppingOptions.length);
         sandwich.addTopping(new RegularTopping(toppingOptions[choice - 1]));
@@ -83,7 +83,7 @@ public class SandwichBuilderHelper {
         Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
         System.out.println("Select sauce:");
         for (int i = 0; i <= sauceOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, sauceOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, sauceOptions[i].getValue());
         }
         int choice = handleInput(scanner, sauceOptions.length);
         sandwich.addSauce(new Sauce(sauceOptions[choice - 1]));
@@ -93,7 +93,7 @@ public class SandwichBuilderHelper {
         System.out.println("Add Sides");
         Side.SideType[] sideOptions = Side.getAllSideOptions();
         for (int i = 0; i <= sideOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, sideOptions[i].getValue());
+            System.out.printf("\t%d) %s\n", i + 1, sideOptions[i].getValue());
         }
         int sideChoice = handleInput(scanner, sideOptions.length);
         switch (sideChoice) {
@@ -102,8 +102,9 @@ public class SandwichBuilderHelper {
                 Sauce.SauceType[] sauceOptions = Sauce.getAllSauceOptions();
                 System.out.println("Select a sauce as a side:");
                 for (int i = 0; i < sauceOptions.length; i++) {
-                    System.out.printf("\n\t%d) %s", i + 1, sauceOptions[i].getValue());
+                    System.out.printf("\t%d) %s", i + 1, sauceOptions[i].getValue());
                 }
+                System.out.println();
                 int sauceChoice = handleInput(scanner, sauceOptions.length);
                 sandwich.addSide(new Side(Side.SideType.SAUCE, new Sauce(sauceOptions[sauceChoice - 1])));
             }
@@ -115,7 +116,7 @@ public class SandwichBuilderHelper {
         System.out.println("Would you like your sandwich toasted?");
         String[] toastOptions = {"Toast", "Don't Toast"};
         for (int i = 0; i <= toastOptions.length - 1; i++) {
-            System.out.printf("\n\t%d) %s\n", i + 1, toastOptions[i]);
+            System.out.printf("\t%d) %s\n", i + 1, toastOptions[i]);
         }
         int choice = handleInput(scanner, 2);
         sandwich.setToasted(choice == 1);
@@ -213,7 +214,7 @@ public class SandwichBuilderHelper {
                 }
             } else {
                 System.out.println("Please enter a valid number.");
-                scanner.next(); // Clear the invalid input
+                scanner.next();
             }
         }
         return choice;

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CustomizeSandwichScreen implements ScreenState {
     @Override
     public void display() {
-        System.out.println("TODO: Display menu here");
+        System.out.println("====== BUILD YOUR SANDWICH ======");
     }
 
     @Override
@@ -15,12 +15,13 @@ public class CustomizeSandwichScreen implements ScreenState {
         Sandwich sandwich = new Sandwich();
         SandwichBuilderHelper.chooseSize(scanner, sandwich);
         SandwichBuilderHelper.chooseBread(scanner, sandwich);
-        System.out.println("Add to your sandwich:");
-
         int userChoice;
         do {
-            System.out.println("\n\t1) Add Meat\n\t2) Add Cheese\n\t3) Add Other Toppings\n\t4) Add Sauce\n\t5) Add " +
-                    "Sides\n\t6) Continue\n\t0) Cancel");
+            String[] customSandwichOptions = {"1) Add Meat", "2) Add Cheese", "3) Add Other Toppings", "4) Add Sauce",
+                    "5) Add Sides", "6) Continue", "0) Cancel"};
+            for(String option : customSandwichOptions){
+                System.out.println("\t " + option);
+            }
             userChoice = scanner.nextInt();
             switch (userChoice) {
                 case 0 -> {
@@ -32,18 +33,14 @@ public class CustomizeSandwichScreen implements ScreenState {
                 case 3 -> SandwichBuilderHelper.chooseVeggies(scanner, sandwich);
                 case 4 -> SandwichBuilderHelper.chooseSauces(scanner, sandwich);
                 case 5 -> SandwichBuilderHelper.chooseSides(scanner, sandwich);
-                case 6 -> {
-                    System.out.println("Continuing");
-
-                }
+                case 6 -> SandwichBuilderHelper.chooseToasted(scanner, sandwich);
                 default -> System.out.println("Choose a valid option");
             }
         } while (userChoice != 6);
-        SandwichBuilderHelper.chooseToasted(scanner, sandwich);
-
+//TODO: clear screen here
         System.out.println("Here's your sandwich order");
-        System.out.println(sandwich.getOrderLine());
-        System.out.println("Does everything look ok?");
+        System.out.println(sandwich.getReceiptLine());
+        System.out.println("\nDoes everything look ok?");
         String[] confirmationOptions = {"1) Confirm", "0) Cancel Sandwich"};
         for (String option : confirmationOptions) {
             System.out.println("\t" + option);

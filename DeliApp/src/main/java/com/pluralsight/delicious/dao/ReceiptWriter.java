@@ -37,16 +37,14 @@ public class ReceiptWriter {
                 pw.println("\n----------------------------------------------------");
                 pw.printf("Customer Name: %s", currentOrder.getCustomer().getCustomerName());
                 pw.println("\n----------------------------------------------------");
-
-                pw.println("\nORDER SUMMARY");
+                pw.println("ORDER SUMMARY");
                 pw.println();
                 currentOrder.getOrderItems().forEach(item -> {
                     pw.println(item.getReceiptLine());
-                    pw.println();
                 });
                 pw.println("\n----------------------------------------------------");
                 String total = String.format("$%.2f", currentOrder.getPrice());
-                pw.printf("%-30s%10s%n", "ORDER TOTAL:", total);
+                pw.printf("%-30s%10s", "ORDER TOTAL:", total);
             }
             System.out.println("Receipt written to file: " + filePath);
         } catch (IOException e) {

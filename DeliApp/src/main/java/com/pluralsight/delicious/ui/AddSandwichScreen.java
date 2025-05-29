@@ -5,13 +5,13 @@ import com.pluralsight.delicious.models.Order;
 import java.util.Scanner;
 
 public class AddSandwichScreen implements ScreenState {
-    private final String[] options = {"Create Custom Sandwich", "View Signature Sandwiches"};
+    private final String[] options = {"1) Create Custom Sandwich", "2) View Signature Sandwiches"};
 
     @Override
     public void display() {
         System.out.println("What kind of sandwich would you like to order?");
-        for (int i = 0; i < options.length; i++){
-            System.out.printf("%d) %s", i + 1, options[i]);
+        for(String option: options){
+            System.out.println("\t" + option);
         }
     }
 

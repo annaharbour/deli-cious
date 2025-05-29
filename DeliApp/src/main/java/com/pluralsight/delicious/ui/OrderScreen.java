@@ -10,9 +10,10 @@ public class OrderScreen implements ScreenState {
 
     @Override
     public void display() {
+//        TODO: Clear screen
         System.out.println("What can I get you today?");
-        for (int i = 0; i < options.length; i++) {
-            System.out.println("\n\t" + options[i]);
+        for (String option : options) {
+            System.out.println("\t" + option);
         }
     }
 

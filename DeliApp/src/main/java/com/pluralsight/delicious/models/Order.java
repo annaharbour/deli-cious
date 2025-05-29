@@ -44,11 +44,20 @@ public class Order {
 
     @Override
     public String toString() {
+
         StringBuilder order = new StringBuilder();
-        for (MenuItem orderItem : orderItems) {
-            order.append(orderItem.getOrderLine()).append("\n");
-        }
-        order.append(String.format("$%.2f", getPrice()));
+        orderItems.forEach(item -> {
+            order.append(String.format(item.getReceiptLine() + "\n\n"));
+        });
+        order.append("----------------------------------------------------");
+        String total = String.format("$%.2f", getPrice());
+        order.append(String.format("\n%-30s%10s%n", "ORDER TOTAL:", total));
         return order.toString();
+//
+//        for (MenuItem orderItem : orderItems) {
+//            order.append(orderItem.getOrderLine()).append("\n");
+//        }
+//        order.append(String.format("$%.2f", getPrice()));
+//        return order.toString();
     }
 }
