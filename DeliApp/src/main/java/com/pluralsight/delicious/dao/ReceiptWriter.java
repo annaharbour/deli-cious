@@ -32,17 +32,16 @@ public class ReceiptWriter {
             Path filePath = folderPath.resolve(fileName);
 
             try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(filePath))) {
-                pw.printf("Order Timestamp: %s",
+                pw.printf("Order Timestamp: %s\n",
                         currentOrder.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                pw.println("\n----------------------------------------------------");
-                pw.printf("Customer Name: %s", currentOrder.getCustomer().getCustomerName());
-                pw.println("\n----------------------------------------------------");
+                pw.println("----------------------------------------------------");
+                pw.printf("Customer Name: %s\n", currentOrder.getCustomer().getCustomerName());
+                pw.println("----------------------------------------------------");
                 pw.println("ORDER SUMMARY");
-                pw.println();
                 currentOrder.getOrderItems().forEach(item -> {
                     pw.println(item.getReceiptLine());
                 });
-                pw.println("\n----------------------------------------------------");
+                pw.println("----------------------------------------------------");
                 String total = String.format("$%.2f", currentOrder.getPrice());
                 pw.printf("%-30s%10s", "ORDER TOTAL:", total);
             }
