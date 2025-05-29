@@ -60,6 +60,18 @@ public class Sandwich implements MenuItem {
         this.breadType = breadType;
     }
 
+    public SandwichSize getSize() {
+        return size;
+    }
+
+    public BreadType getBreadType() {
+        return breadType;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
+
     public List<Topping> getToppings() {
         return toppings;
     }
@@ -76,16 +88,24 @@ public class Sandwich implements MenuItem {
         this.sauces.add(sauce);
     }
 
-    public void removeSauce(String sauceString) {
-        this.sauces.removeIf(sauce -> sauce.toString().equalsIgnoreCase(sauceString));
+    public List<Sauce> getSauces() {
+        return sauces;
+    }
+
+    public void removeSauce(Sauce sauceToRemove) {
+        this.sauces.removeIf(sauce -> sauce == sauceToRemove);
     }
 
     public void addSide(Side side) {
         this.sides.add(side);
     }
 
-    public void removeSide(String sideString) {
-        this.sides.removeIf(side -> side.toString().equalsIgnoreCase(sideString));
+    public List<Side> getSides() {
+        return sides;
+    }
+
+    public void removeSide(Side sideToRemove) {
+        this.sides.removeIf(side -> side == sideToRemove);
     }
 
     public void setToasted(boolean toasted) {

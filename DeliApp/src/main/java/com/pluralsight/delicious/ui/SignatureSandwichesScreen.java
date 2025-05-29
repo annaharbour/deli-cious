@@ -2,76 +2,43 @@ package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SignatureSandwichesScreen implements ScreenState {
-    SignatureSandwich BLT =
-            new SignatureSandwich(
-                    Sandwich.SandwichSize.EIGHT_INCH,
-                    Sandwich.BreadType.WHITE,
-                    new ArrayList<>(List.of(
-                            new MeatTopping(MeatTopping.MeatType.BACON, false),
-                            new RegularTopping(RegularTopping.FreeTopping.LETTUCE),
-                            new RegularTopping(RegularTopping.FreeTopping.GUACAMOLE),
-                            new RegularTopping(RegularTopping.FreeTopping.TOMATOES)
-                    )),
-                    new ArrayList<>(List.of(
-                            new Sauce(Sauce.SauceType.RANCH)
-                    )),
-                    new ArrayList<>(List.of()),
-                    false,
-                    "BLT"
-            );
-    SignatureSandwich philly =
-            new SignatureSandwich(
-                    Sandwich.SandwichSize.EIGHT_INCH,
-                    Sandwich.BreadType.WHITE,
-                    new ArrayList<>(List.of(
-                            new MeatTopping(MeatTopping.MeatType.STEAK, false),
-                            new CheeseTopping(CheeseTopping.CheeseType.PROVOLONE, false),
-                            new RegularTopping(RegularTopping.FreeTopping.PEPPERS),
-                            new RegularTopping(RegularTopping.FreeTopping.MUSHROOMS),
-                            new RegularTopping(RegularTopping.FreeTopping.ONIONS)
-                    )),
-                    new ArrayList<>(List.of(
-                            new Sauce(Sauce.SauceType.MAYO)
-                    )),
-                    new ArrayList<>(List.of(
-                            new Side(Side.SideType.AU_JUS)
-                    )),
-                    true,
-                    "Philly Cheese Steak"
-            );
-    private final ArrayList<SignatureSandwich> signatureSandwiches = new ArrayList<>(List.of(BLT, philly));
+    private final SignatureSandwich.SignatureSandwichType[] sandwichOptions =
+            SignatureSandwich.getAllSignatureSandwiches();
 
     @Override
     public void display() {
-        System.out.println("Here are our signature sandwiches: ");
-        System.out.println("Choose an option or enter 0 to return to Order Screen");
-        signatureSandwiches.forEach(signatureSandwich -> {
-            System.out.printf("\n\t%d) %s", signatureSandwiches.indexOf(signatureSandwich) + 1,
-                    signatureSandwich.getSignatureSandwichName());
-        });
+        System.out.println("Here are our signature sandwiches:");
+        System.out.println("Choose an option or enter 0 to return to Order Screen:");
+        for (int i = 0; i < sandwichOptions.length; i++) {
+            System.out.printf("\t%d) %s\n", i + 1, sandwichOptions[i].getSandwich().getSignatureSandwichName());
+        }
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         int input;
         input = scanner.nextInt();
-        if (input > 0 && input <= signatureSandwiches.size()) {
-            SignatureSandwich selected = new SignatureSandwich(signatureSandwiches.get(input - 1));            System.out.println("You have selected :\n" + selected.getOrderLine());
+        if (input > 0 && input <= sandwichOptions.length) {
+
+            SignatureSandwich original = sandwichOptions[input - 1].getSandwich();
+            SignatureSandwich selected = new SignatureSandwich(original);
+            System.out.println("You have selected :\n" + selected.getOrderLine());
             System.out.printf("Choose From the Following:\n\t1)Order %s?\n\t2) Customize %s\n\t3) Cancel",
                     selected.getSignatureSandwichName(), selected.getSignatureSandwichName());
             input = scanner.nextInt();
             switch (input) {
+                case 0 -> System.out.println("Ok!");
                 case 1 -> currentOrder.addToOrder(selected);
                 case 2 -> {
-                    SignatureSandwich customizedSandwich = customizeSandwich(selected, scanner);
-                    currentOrder.addToOrder(customizedSandwich);
+                    SignatureSandwich customized = customizeSandwich(selected, scanner);
+                    currentOrder.addToOrder(customized);
                 }
                 case 3 -> System.out.println("Canceling sandwich order...");
+                default -> System.out.println("Invalid Option");
             }
         }
         return new OrderScreen();
@@ -99,22 +66,21 @@ public class SignatureSandwichesScreen implements ScreenState {
                 case 8 -> SandwichBuilderHelper.chooseToasted(scanner, sandwich);
                 case 9 -> {
                     List<Topping> toppings = sandwich.getToppings();
-
                     if (toppings.isEmpty()) {
                         System.out.println("There are no toppings to remove.");
                         break;
                     }
-
                     System.out.println("Select a topping to remove:");
                     for (int i = 0; i < toppings.size(); i++) {
                         Topping topping = toppings.get(i);
-                        String name = (topping instanceof MeatTopping) ? topping.toString()
-                                : (topping instanceof CheeseTopping) ? topping.toString()
-                                : (topping instanceof RegularTopping) ? topping.toString()
-                                : "Unknown";
-                        System.out.printf("\t%d) %s%n", i + 1, name);
+                        if (topping instanceof MeatTopping meatTopping) {
+                            System.out.printf("\t%d) %s%n", i + 1, meatTopping);
+                        } else if (topping instanceof CheeseTopping cheeseTopping) {
+                            System.out.printf("\t%d) %s%n", i + 1, cheeseTopping);
+                        } else if (topping instanceof RegularTopping regularTopping) {
+                            System.out.printf("\t%d) %s%n", i + 1, regularTopping);
+                        }
                     }
-
                     int toppingChoice;
                     do {
                         System.out.print("Your choice: ");
@@ -129,23 +95,56 @@ public class SignatureSandwichesScreen implements ScreenState {
                     System.out.println(toRemove + " removed.");
                 }
                 case 10 -> {
-                    scanner.next();
-                    String sauceName = scanner.nextLine();
-                    sandwich.removeSauce(sauceName);
+                    List<Sauce> sauces = sandwich.getSauces();
+                    if (sauces.isEmpty()) {
+                        System.out.println("There are no sauces to remove.");
+                        break;
+                    }
+
+                    System.out.println("Select a sauce to remove:");
+                    for (int i = 0; i < sauces.size(); i++) {
+                        System.out.printf("\t%d) %s%n", i + 1, sauces.get(i));
+                    }
+
+                    int sauceChoice;
+                    do {
+                        System.out.print("Your choice: ");
+                        sauceChoice = scanner.nextInt();
+                        if (sauceChoice < 1 || sauceChoice > sauces.size()) {
+                            System.out.println("Invalid choice, please select a valid sauce.");
+                        }
+                    } while (sauceChoice < 1 || sauceChoice > sauces.size());
+
+                    Sauce removedSauce = sauces.get(sauceChoice - 1);
+                    sandwich.removeSauce(removedSauce);
+                    System.out.println(removedSauce + " removed.");
+
                 }
                 case 11 -> {
-                    scanner.next();
-                    String sideName = scanner.nextLine();
-                    sandwich.removeSide(sideName);
+                    List<Side> sides = sandwich.getSides();
+                    if (sides.isEmpty()) {
+                        System.out.println("There are no sides to remove.");
+                        break;
+                    }
+                    System.out.println("Select a side to remove:");
+                    for (int i = 0; i < sides.size(); i++) {
+                        System.out.printf("\t%d) %s%n", i + 1, sides.get(i));
+                    }
+                    int sideChoice;
+                    do {
+                        System.out.print("Your choice: ");
+                        sideChoice = scanner.nextInt();
+                        if (sideChoice < 1 || sideChoice > sides.size()) {
+                            System.out.println("Invalid choice, please select a valid sauce.");
+                        }
+                    } while (sideChoice < 1 || sideChoice > sides.size());
+
+                    Side removedSide = sides.get(sideChoice - 1);
+                    sandwich.removeSide(removedSide);
+                    System.out.println(removedSide + " removed.");
                 }
-                case 12 -> {
-                    System.out.println("Adding Sandwich");
-                    System.out.println(sandwich.getOrderLine());
-                    return sandwich;
-                }
-                default -> System.out.println("Invalid option");
             }
-        }
-        while (true);
+        } while (choice != 12);
+        return sandwich;
     }
 }
