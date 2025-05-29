@@ -3,22 +3,21 @@ package com.pluralsight.delicious.ui;
 import com.pluralsight.delicious.dao.ReceiptWriter;
 import com.pluralsight.delicious.models.Customer;
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CheckoutScreen implements ScreenState {
     @Override
     public void display() {
-        System.out.println("Enter the name for your order?");
+        ClearScreen.clearScreen();
+        System.out.println("========= CHECKOUT =========");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
-        scanner.nextLine();
-        System.out.println("Here is your order");
         System.out.println(currentOrder);
-        System.out.println("Enter 1) Confirm or 0) Cancel");
+        System.out.println("Enter \t1) Confirm \t2) Add More\t0) Cancel Order");
         int input;
         do {
             input = scanner.nextInt();
@@ -30,12 +29,17 @@ public class CheckoutScreen implements ScreenState {
                     currentOrder.setCustomer(new Customer(customerName));
                     ReceiptWriter rw = new ReceiptWriter(currentOrder);
                     rw.writeLines();
+                    return null;
+                }
+                case 2 -> {
+                    ClearScreen.clearScreen();
+                    return new OrderScreen();
                 }
                 case 0 -> {
-                    currentOrder = new Order(new ArrayList<>());
+                    currentOrder.clear();
+                    return new OrderScreen();
                 }
             }
-        } while (input != 0 && input != 1);
-        return new OrderScreen();
+        } while (true);
     }
 }

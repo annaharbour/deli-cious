@@ -28,17 +28,23 @@ public class ReceiptWriter {
             }
 
             String fileName = currentOrder.getTimeStamp().format(DATE_FORMAT) + "-" +
-                    currentOrder.getTimeStamp().format(TIME_FORMAT) + ".csv";
+                    currentOrder.getTimeStamp().format(TIME_FORMAT) + ".txt";
             Path filePath = folderPath.resolve(fileName);
 
             try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(filePath))) {
-//                pw.printf("\"Customer ID:\",\"%s\"%n", currentOrder.getCustomer().getCustomerID());
-                pw.printf("\"Customer Name:\",\"%s\"%n", currentOrder.getCustomer().getCustomerName());
-                pw.printf("\"Order Time:\",\"%s\"%n", currentOrder.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                pw.println("\"----------------------------------------\"");
-                pw.println("\"Item\",\"Details\",\"Price\"");
-
-                currentOrder.getOrderItems().forEach(item -> pw.println(item.getReceiptLine()));
+                pw.printf("Order Timestamp: %s\n",
+                        currentOrder.getTimeStamp().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                pw.println("----------------------------------------------------");
+                pw.printf("Customer Name: %s\n", currentOrder.getCustomer().getCustomerName());
+                pw.println("----------------------------------------------------");
+                pw.println("ORDER SUMMARY");
+                currentOrder.getOrderItems().forEach(item -> {
+                    pw.println(item.getReceiptLine());
+                    pw.println();
+                });
+                pw.println("----------------------------------------------------");
+                String total = String.format("$%.2f", currentOrder.getPrice());
+                pw.printf("%-30s%10s", "ORDER TOTAL:", total);
             }
             System.out.println("Receipt written to file: " + filePath);
         } catch (IOException e) {

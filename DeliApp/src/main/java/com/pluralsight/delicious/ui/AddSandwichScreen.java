@@ -1,17 +1,19 @@
 package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
 
 import java.util.Scanner;
 
 public class AddSandwichScreen implements ScreenState {
-    private String[] options = {"Create Custom Sandwich", "View Signature Sandwiches"};
+    private final String[] options = {"1) Create Custom Sandwich", "2) View Signature Sandwiches"};
 
     @Override
     public void display() {
+        ClearScreen.clearScreen();
         System.out.println("What kind of sandwich would you like to order?");
-        for (int i = 0; i < options.length; i++){
-            System.out.printf("%d) %s", i + 1, options[i]);
+        for(String option: options){
+            System.out.println("\t" + option);
         }
     }
 
@@ -19,10 +21,17 @@ public class AddSandwichScreen implements ScreenState {
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         int input = scanner.nextInt();
         return switch (input) {
-            case 1 -> new CustomizeSandwichScreen();
-            case 2 -> new SignatureSandwichesScreen();
+            case 1 -> {
+                ClearScreen.clearScreen();
+                yield new CustomizeSandwichScreen();
+            }
+            case 2 -> {
+                ClearScreen.clearScreen();
+                yield new SignatureSandwichesScreen();
+            }
             default -> {
                 System.out.println("Invalid selection");
+                ClearScreen.clearScreen();
                 yield this;
             }
 

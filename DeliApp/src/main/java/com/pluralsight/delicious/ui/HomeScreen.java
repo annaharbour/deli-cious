@@ -1,22 +1,25 @@
 package com.pluralsight.delicious.ui;
 
 import com.pluralsight.delicious.models.Order;
+import com.pluralsight.delicious.ui.utils.ClearScreen;
 
 import java.util.Scanner;
 
 public class HomeScreen implements ScreenState {
-    private String[] options = {"1) New Order", "0) Exit"};
 
     @Override
-    public void display(){
-        System.out.println("Welcome to Deli-cious! Select from the following options: ");
-        for(int i = 0; i < options.length; i++){
-            System.out.println("\t" + options[i]);;
-        }
+    public void display() {
+        ClearScreen.clearScreen();
+        System.out.println("============ Welcome to Deli-cious! ===========");
     }
 
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
+        System.out.println("Select from the following options: ");
+        String[] options = {"1) New Order", "0) Exit"};
+        for (String option : options) {
+            System.out.println("\t" + option);
+        }
         String input = scanner.nextLine();
         return switch (input) {
             case "1" -> new OrderScreen();

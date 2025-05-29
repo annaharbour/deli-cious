@@ -26,10 +26,6 @@ public class Order {
         this.orderItems.add(menuItem);
     }
 
-    public void removeFromOrder(MenuItem menuItem) {
-        this.orderItems = this.orderItems.stream().filter(item -> item != menuItem).collect(Collectors.toList());
-    }
-
     public List<MenuItem> getOrderItems() {
         return orderItems;
     }
@@ -38,12 +34,28 @@ public class Order {
         return timeStamp;
     }
 
+    public double getPrice(){
+        double total = 0;
+        for(MenuItem item : orderItems){
+            total += item.getPrice();
+        }
+        return total;
+    }
+
+    public void clear() {
+        this.orderItems.clear();
+    }
+
     @Override
     public String toString() {
+
         StringBuilder order = new StringBuilder();
-        for (MenuItem orderItem : orderItems) {
-            order.append(orderItem.getOrderLine()).append("\n");
-        }
+        orderItems.forEach(item -> {
+            order.append(String.format(item.getReceiptLine() + "\n"));
+        });
+        order.append("----------------------------------------------------");
+        String total = String.format("$%.2f", getPrice());
+        order.append(String.format("\n%-30s%10s%n", "ORDER TOTAL:", total));
         return order.toString();
     }
 }
