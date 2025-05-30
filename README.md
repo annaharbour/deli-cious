@@ -128,6 +128,9 @@ classDiagram
 
     Sandwich <|.. SignatureSandwich
     Sandwich o-- Topping
+    Sandwich o-- Sauce
+    Sandwich o-- Side
+
     Order o-- MenuItem
 
     ScreenState <|.. HomeScreen
