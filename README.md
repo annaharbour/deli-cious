@@ -385,7 +385,7 @@ A large portion of the app has been protected from crashing with invalid inputs 
 
 ![Screenshot 2025-05-30 01 19 50](https://github.com/user-attachments/assets/d2faa22e-fc19-4ea2-bc90-45b0d2321d73)
 
-* Signature Sandwich *
+*Signature Sandwich*
 
 ![Screenshot 2025-05-30 01 23 05](https://github.com/user-attachments/assets/94d01b61-4e5f-4919-938d-ce2a1c9e2ec1)
 
