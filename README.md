@@ -246,15 +246,6 @@ This inheritance ensures that a signature sandwich can participate in all system
 
 - signatureSandwichType: Enum identifying the preset sandwich category (e.g., CLUB, BLT, VEGGIE).
 - signatureSandwichName: Human-readable name for the sandwich.
-- Optional override behavior or constraints—for example, preventing users from changing ingredients unless explicitly allowed.
-
-🧠 Why This Matters
-
-Using inheritance allows the system to:
-
-- Reuse behavior: No need to re-implement topping/sauce/side logic.
-- Differentiate meaningfully: Signature sandwiches are conceptually different from custom builds, and this distinction is cleanly represented in the class hierarchy.
-- Extend easily: New signature sandwiches can be introduced with minimal changes to core logic.
 
 ➡️ Highlight: SignatureSandwich elegantly balances customization and standardization, offering users speed and familiarity while keeping the backend design robust and DRY.
 
