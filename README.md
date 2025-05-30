@@ -121,7 +121,6 @@ classDiagram
     MenuItem <|.. Drink
 
     Sandwich <|.. SignatureSandwich
-    SignatureSandwichLoader --> SignatureSandwich : creates
     Sandwich o-- Topping
     Order o-- MenuItem
 
