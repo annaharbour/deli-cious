@@ -28,54 +28,75 @@ classDiagram
 
     %% Concrete Classes
     class Sandwich {
-        -Size size
+        -SandwichSize size
         -BreadType bread
         -boolean toasted
         -List~Topping~ toppings
-        -List~SauceType~ sauces
+        -List~Sauce~ sauces
         -List~Sides~ sides
         +addTopping(Topping)
         +addSauce(SauceType)
-        +double getPrice()
-        +String getReceiptLine()
+        +removeTopping(topping)
+        +removeSauce(sauce)
+        +removeSide(side)
+        +addTopping(Topping)
+        +addSauce(SauceType)
+        +SandwichSize[] getAllSizeOptions()
     }
 
     class SignatureSandwich{
         -String name
-    }
-
-    class SignatureSandwichLoader {
-        +List~SignatureSandwich~ loadFromCSV(String path)
+        -SignatureSandwichType signatureSandwichType;
+        -String signatureSandwichName
     }
 
     class PremiumTopping {
-        -ToppingType type
-        -boolean extra
-        +double getPrice()
+        -double basePrice
+        +double getExtraCost()
     }
 
     class RegularTopping {
-        -ToppingType type
+        -FreeTopping freeTopping
+        -boolean extra
+        +FreeTopping[] getAllRegularToppings()
+    }
+
+    class MeatTopping {
+        -MeatType meatType
+        -boolean extra
+        +MeatType[] getAllMeatToppings()
+    }
+
+    class CheeseTopping {
+        -MeatType meatType
+        -boolean extra
+        +CheeseType[] getAllCheeseToppings()
     }
 
     class Chips {
-        -ChipType type
-        +double getPrice()
-        +String getReceiptLine()
+        -Flavor flavor
+        -double price
+        +Chips.Flavor[] getAllChipFlavors()
     }
 
     class Drink {
-        -String size
-        -String flavor
+        -Size size
+        -Flavor flavor
+        +Drink.Size[] getAllDrinkSizeOptions() 
         +double getPrice()
-        +String getReceiptLine()
     }
 
     class Order {
+        -Customer customer
+        -LocalDateTime timeStamp
         -List~MenuItem~ orderItems
         +addItem(OrderableItem)
         +double getTotalPrice()
-        +String generateReceipt()
+        +clear()
+    }
+
+    class Customer {
+        -String customerName
     }
 
     class FileReceiptWriter {
@@ -113,50 +134,3 @@ classDiagram
     ReceiptWriter <|.. FileReceiptWriter
     FileReceiptWriter --> Order
 ```
-SQL QUERY
-SELECT * FROM CITY WHERE POPULATION > 100000 AND COUNTRYCODE = "USA";
-
-FIZZBUZZ
-PYTHON
-i = 1
-for i in range(1, 101):
-    if i % 3 == 0 and i % 5 == 0:
-        print("FizzBuzz")
-    elif i % 3 == 0:
-        print("Fizz")
-    elif i % 5 == 0:
-        print("Buzz")
-    else:
-        print(i)
-JAVA
-for(int i = 1; i <= 100; i++){
-    if(i % 3 == 0 && i % 5 == 0){
-        System.out.println("FizzBuzz");
-    } else if (i % 3 == 0){
-        System.out.println("Fizz);
-    } else if (i % 5 == 0){
-        System.out.println("Buzz");
-    } else {
-        System.out.println(i);
-    }
-}
-
-ANAGRAM: HASHMAP
-by checking that each hashmap is of the same length, we only have to iterate through one of the hashmaps Time O(s+t) AKA O(n)
-        
-        if len(s) != len(t):
-            return False
-        
-        s_count, t_count = {}, {}
-        
-        get the value (or 0 if the key doesn't exist)
-
-        for i in range(len(s)):
-            s_count[s[i]] = 1 + s_count.get(s[i], 0)
-            t_count[t[i]] = 1 + t_count.get(t[i], 0)
-        for j in s_count:
-            if s_count[j] != t_count.get(j, 0):
-                return False
-        return True
-
-
