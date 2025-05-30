@@ -99,10 +99,6 @@ classDiagram
         -String customerName
     }
 
-    class FileReceiptWriter {
-        +void write(Order order)
-    }
-
     %% Screen Classes
     class HomeScreen
     class OrderScreen
@@ -130,6 +126,5 @@ classDiagram
     Screen <|.. AddDrinkScreen
     Screen <|.. CheckoutScreen
 
-    ReceiptWriter <|.. FileReceiptWriter
-    FileReceiptWriter --> Order
+    ReceiptWriter --> Order
 ```
