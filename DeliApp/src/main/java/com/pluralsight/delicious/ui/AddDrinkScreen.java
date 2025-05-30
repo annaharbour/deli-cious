@@ -18,14 +18,21 @@ public class AddDrinkScreen implements ScreenState {
     @Override
     public ScreenState handleInput(Scanner scanner, Order currentOrder) {
         Drink drink = new Drink();
-        PrintColored.printColored("What size drink would you like?","yellow");
+        PrintColored.printColored("What size drink would you like?", "yellow");
         Drink.Size[] drinkSizeOptions = Drink.getAllDrinkSizeOptions();
         for (int i = 0; i <= drinkSizeOptions.length - 1; i++) {
             System.out.printf("\t%d) %s\n", i + 1, drinkSizeOptions[i].getValue());
         }
         int drinkSizeChoice;
+
         do {
-            drinkSizeChoice = scanner.nextInt();
+            if (scanner.hasNextInt()) {
+                drinkSizeChoice = scanner.nextInt();
+            } else {
+                PrintColored.printColored("Please enter a valid number.", "red");
+                scanner.next(); // Consume the invalid input
+                drinkSizeChoice = -1; // Reset choice to ensure the loop continues
+            }
             if (drinkSizeChoice < 1 || drinkSizeChoice > drinkSizeOptions.length) {
                 PrintColored.printColored("Invalid choice, please select a valid size option.", "red");
             }
