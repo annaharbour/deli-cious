@@ -110,6 +110,8 @@ classDiagram
 
     %% Relationships
     Topping <|.. PremiumTopping
+    PremiumTopping <|.. CheeseTopping
+    PremiumTopping <|.. MeatTopping
     Topping <|.. IncludedTopping
 
     MenuItem <|.. Sandwich
