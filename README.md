@@ -103,7 +103,7 @@ classDiagram
     class HomeScreen
     class OrderScreen
     class AddSandwichScreen
-    class SignatureSandwichesScreen
+    class SignatureSandwichScreen
     class AddChipsScreen
     class AddDrinkScreen
     class CheckoutScreen
