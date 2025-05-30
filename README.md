@@ -127,7 +127,7 @@ classDiagram
     ScreenState <|.. AddSandwichScreen
     ScreenState <|.. AddDrinkScreen
     ScreenState <|.. CheckoutScreen
-    ScreenState <|.. SignatureSandwichScreenScreen
+    ScreenState <|.. SignatureSandwichScreen
     ScreenState <|.. AddChipsScreen
 
 
