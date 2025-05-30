@@ -170,13 +170,13 @@ public interface ScreenState {
 
 * Benefits *
 
-Modular Design: Each screen is self-contained and easy to maintain or extend.
+- Modular Design: Each screen is self-contained and easy to maintain or extend.
 
-Scalable Navigation: Adding a new screen is as simple as implementing the interface.
+- Scalable Navigation: Adding a new screen is as simple as implementing the interface.
 
-Testability: Individual screens can be tested independently by invoking their run() method with mocked input.
+- Testability: Individual screens can be tested independently by invoking their run() method with mocked input.
 
-Decoupling: UI flow management is separated from the business logic, making the codebase more manageable.
+- Decoupling: UI flow management is separated from the business logic, making the codebase more manageable.
 
 ```
 public class OrderScreen implements ScreenState {
@@ -339,17 +339,17 @@ public enum FreeTopping {
 
 CheeseType — All available cheese options (e.g., Cheddar, Swiss)
 
-MeatType — All available cheese options (e.g., Cheddar, Swiss)
+- MeatType — All available cheese options (e.g., Cheddar, Swiss)
 
-SauceType — Condiments and sauces (e.g., Mayo, Mustard, Ketchup)
+- SauceType — Condiments and sauces (e.g., Mayo, Mustard, Ketchup)
 
-SideType - Au Jus or Sauce
+- SideType - Au Jus or Sauce
 
-SignatureSandwichType — Maps names to default sandwich builds
+- SignatureSandwichType — Maps names to default sandwich builds
 
-BreadType, SandwichSize — Core configuration choices
+- BreadType, SandwichSize — Core configuration choices
 
-Chips.Flavor, Drink.Size, Drink.Flavor — Side item variations
+- Chips.Flavor, Drink.Size, Drink.Flavor — Side item variations
 
 ➡️ Highlight: The use of enums enhances user input validation, simplifies menu rendering, and keeps the codebase maintainable.
 
