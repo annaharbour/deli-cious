@@ -242,12 +242,15 @@ The SignatureSandwich inherits all the core capabilities of a Sandwich, includin
 - Methods like addTopping(), addSauce(), removeTopping(), etc.
 
 This inheritance ensures that a signature sandwich can participate in all system flows and behave like any other Sandwich object—with the added benefit of having predefined settings.
+
 - signatureSandwichType: Enum identifying the preset sandwich category (e.g., CLUB, BLT, VEGGIE).
 - signatureSandwichName: Human-readable name for the sandwich.
 - Optional override behavior or constraints—for example, preventing users from changing ingredients unless explicitly allowed.
 
 🧠 Why This Matters
+
 Using inheritance allows the system to:
+
 - Reuse behavior: No need to re-implement topping/sauce/side logic.
 - Differentiate meaningfully: Signature sandwiches are conceptually different from custom builds, and this distinction is cleanly represented in the class hierarchy.
 - Extend easily: New signature sandwiches can be introduced with minimal changes to core logic.
