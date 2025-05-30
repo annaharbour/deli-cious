@@ -4,7 +4,7 @@ This project is the point of sales java application for DELI-cious, a custom san
 classDiagram
     %% Interfaces
     class Topping {
-        <<interface>>
+        <<abstract>>
         +String getName()
         +double getPrice(String size)
         +boolean isExtra()
@@ -16,14 +16,14 @@ classDiagram
         +String getReceiptLine()
     }
 
-    class Screen {
+    class ScreenState {
         <<interface>>
         +void run()
     }
 
     class ReceiptWriter {
-        <<interface>>
-        +void write(Order order)
+        -Order currentOrder
+        +void writeLines()
     }
 
     %% Concrete Classes
@@ -122,11 +122,14 @@ classDiagram
     Sandwich o-- Topping
     Order o-- MenuItem
 
-    Screen <|.. HomeScreen
-    Screen <|.. OrderScreen
-    Screen <|.. AddSandwichScreen
-    Screen <|.. AddDrinkScreen
-    Screen <|.. CheckoutScreen
+    ScreenState <|.. HomeScreen
+    ScreenState <|.. OrderScreen
+    ScreenState <|.. AddSandwichScreen
+    ScreenState <|.. AddDrinkScreen
+    ScreenState <|.. CheckoutScreen
+    ScreenState <|.. SignatureSandwichScreenScreen
+    ScreenState <|.. AddChipsScreen
+
 
     ReceiptWriter --> Order
 ```
