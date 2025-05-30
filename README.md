@@ -34,8 +34,6 @@ classDiagram
         -List~Topping~ toppings
         -List~Sauce~ sauces
         -List~Sides~ sides
-        +addTopping(Topping)
-        +addSauce(SauceType)
         +removeTopping(topping)
         +removeSauce(sauce)
         +removeSide(side)
@@ -72,6 +70,16 @@ classDiagram
         -boolean extra
         +CheeseType[] getAllCheeseToppings()
     }
+
+    class Sauce {
+        -SauceType type
+    }
+    
+    class Side {
+        -SideType type
+        -Sauce sauce
+    }
+
 
     class Chips {
         -Flavor flavor
