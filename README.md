@@ -112,7 +112,7 @@ classDiagram
     Topping <|.. PremiumTopping
     PremiumTopping <|.. CheeseTopping
     PremiumTopping <|.. MeatTopping
-    Topping <|.. IncludedTopping
+    Topping <|.. RegularTopping
 
     MenuItem <|.. Sandwich
     MenuItem <|.. Chip
