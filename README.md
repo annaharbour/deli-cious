@@ -231,7 +231,7 @@ public class OrderScreen implements ScreenState {
 
 ----------------
 
-# 🥪 SignatureSandwich Inheritance from Sandwich
+### 🥪 SignatureSandwich Inheritance from Sandwich
 
 In the DELI-cious point-of-sale system, not all sandwiches are built from scratch. Some are pre-designed and popular choices—these are our Signature Sandwiches. To represent these, we introduce the SignatureSandwich class, which extends the more general Sandwich superclass.
 
@@ -252,9 +252,6 @@ Using inheritance allows the system to:
 - Extend easily: New signature sandwiches can be introduced with minimal changes to core logic.
 
 ➡️ Highlight: SignatureSandwich elegantly balances customization and standardization, offering users speed and familiarity while keeping the backend design robust and DRY.
-
-------------------
-
 
 ----------------------------------
 
@@ -358,6 +355,6 @@ Chips.Flavor, Drink.Size, Drink.Flavor — Side item variations
 
 ----------------------------
 
-# 🧪 Testing Support
+### 🧪 Testing Support
 
 The business logic (e.g., ingredient management, sandwich configuration) is fully testable with JUnit. 
