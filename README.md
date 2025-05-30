@@ -258,7 +258,7 @@ Using inheritance allows the system to:
 
 ----------------------------------
 
-# 🥑 Toppings 
+### 🥑 Toppings 
 
 ```
 public abstract class Topping {
@@ -311,7 +311,7 @@ public abstract class PremiumTopping extends Topping {
 
 ---------------------
 
-# 🥬🫑🥒 Enums
+### 🥬🫑🥒 Enums
 Enums are a key part of the design, ensuring that only valid, expected options are allowed for ingredients, sides, and configurations. This avoids the need for fragile string comparisons and provides type-safe access to UI display values and logic branching.
 
 ```
