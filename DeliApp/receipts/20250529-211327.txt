@@ -1,0 +1,18 @@
+Order Timestamp: 2025-05-29 21:13:27
+----------------------------------------------------
+Customer Name: Anna Harbour
+----------------------------------------------------
+ORDER SUMMARY
+	8" ON WHITE                   $10.50
+	Base Price                     $7.00
+	Steak                          $2.00
+	Provolone Cheese               $1.50
+	Peppers                        $0.00
+	Mushrooms                      $0.00
+	Onions                         $0.00
+	Mayo                           $0.00
+	Side of Au Jus                 $0.00
+	Toasted                        $0.00
+
+----------------------------------------------------
+ORDER TOTAL:                      $10.50
