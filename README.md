@@ -358,3 +358,60 @@ CheeseType — All available cheese options (e.g., Cheddar, Swiss)
 ### 🧪 Testing Support
 
 The business logic (e.g., ingredient management, sandwich configuration) is fully testable with JUnit. 
+
+![Screenshot 2025-05-30 01 14 11](https://github.com/user-attachments/assets/ff17503b-1991-4482-8bd2-471158a917c4)
+
+A large portion of the app has been protected from crashing with invalid inputs (i.e. a letter instead of an int)
+
+-------------------------
+
+## User Story Screenshots
+
+### Creating an Order
+
+![Screenshot 2025-05-30 01 15 30](https://github.com/user-attachments/assets/80d33ebd-1a01-4f22-9de1-9a4e2ac23993)
+
+![Screenshot 2025-05-30 01 16 03](https://github.com/user-attachments/assets/4f499ff4-50c0-4ad0-8391-0b325aa767d4)
+
+### Ordering Sandwiches
+
+![Screenshot 2025-05-30 01 16 38](https://github.com/user-attachments/assets/f229efce-990e-433c-8582-e99bc62ed9f6)
+
+![Screenshot 2025-05-30 01 17 09](https://github.com/user-attachments/assets/5e3854c9-933a-4176-80d9-0dac733b130f)
+
+![Screenshot 2025-05-30 01 17 44](https://github.com/user-attachments/assets/50e3b9d6-61de-4f4d-8230-8697c4252c69)
+
+![Screenshot 2025-05-30 01 18 38](https://github.com/user-attachments/assets/2cf40589-beb5-40fb-9361-570061c3d0d4)
+
+![Screenshot 2025-05-30 01 19 50](https://github.com/user-attachments/assets/d2faa22e-fc19-4ea2-bc90-45b0d2321d73)
+
+* Signature Sandwich *
+
+![Screenshot 2025-05-30 01 23 05](https://github.com/user-attachments/assets/94d01b61-4e5f-4919-938d-ce2a1c9e2ec1)
+
+![Screenshot 2025-05-30 01 23 36](https://github.com/user-attachments/assets/7159c074-5f1b-4f46-bbbe-3a1438396408)
+
+![Screenshot 2025-05-30 01 24 04](https://github.com/user-attachments/assets/deb60bc6-5df0-445a-80c2-3aefeeae985f)
+
+### Ordering a Drink and Chips
+
+![Screenshot 2025-05-30 01 20 24](https://github.com/user-attachments/assets/1b31237e-463f-418e-9391-1e9cc63f83e5)
+
+![Screenshot 2025-05-30 01 20 54](https://github.com/user-attachments/assets/d81079e5-3fc8-40be-a8d7-8bbf1dbe422e)
+
+![Screenshot 2025-05-30 01 21 24](https://github.com/user-attachments/assets/7db45aa1-f4b3-4fa2-94ca-2f0fd9a57f52)
+
+![Screenshot 2025-05-30 01 21 57](https://github.com/user-attachments/assets/37ca10e3-4ae1-402b-91ef-6a2c35ed44a9)
+
+![Screenshot 2025-05-30 01 22 32](https://github.com/user-attachments/assets/3a2d5c68-2595-4504-94d7-cabfa5e136cc)
+
+### Checking Out and Printing Receipt to TXT File
+
+![Screenshot 2025-05-30 01 25 16](https://github.com/user-attachments/assets/3eaf5018-07ac-4edd-8a98-ebaa357a2df5)
+
+![Screenshot 2025-05-30 01 26 14](https://github.com/user-attachments/assets/a1b3abb5-5ff3-4196-8083-39cb7ae0624e)
+
+
+
+
+
