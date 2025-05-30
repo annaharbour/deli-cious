@@ -115,7 +115,7 @@ classDiagram
     Topping <|.. RegularTopping
 
     MenuItem <|.. Sandwich
-    MenuItem <|.. Chip
+    MenuItem <|.. Chips
     MenuItem <|.. Drink
 
     Sandwich <|.. SignatureSandwich
