@@ -169,7 +169,7 @@ public interface ScreenState {
 }
 ```
 
-* Benefits *
+*Benefits*
 
 - Modular Design: Each screen is self-contained and easy to maintain or extend.
 
@@ -212,7 +212,7 @@ public class OrderScreen implements ScreenState {
 }
 ```
 
-* Screens That Implement ScreenState *
+*Screens That Implement ScreenState*
 
 - HomeScreen
 
@@ -310,6 +310,7 @@ public abstract class PremiumTopping extends Topping {
 ---------------------
 
 ### 🥬🫑🥒 Enums
+
 Enums are a key part of the design, ensuring that only valid, expected options are allowed for ingredients, sides, and configurations. This avoids the need for fragile string comparisons and provides type-safe access to UI display values and logic branching.
 
 ```
@@ -336,9 +337,9 @@ public enum FreeTopping {
     }
 ```
 
-* 🧀 Other Enums *
+*🧀 Other Enums*
 
-CheeseType — All available cheese options (e.g., Cheddar, Swiss)
+- CheeseType — All available cheese options (e.g., Cheddar, Swiss)
 
 - MeatType — All available cheese options (e.g., Cheddar, Swiss)
 
