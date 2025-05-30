@@ -90,7 +90,7 @@ classDiagram
         -Customer customer
         -LocalDateTime timeStamp
         -List~MenuItem~ orderItems
-        +addItem(OrderableItem)
+        +addItem(MenuItem)
         +double getTotalPrice()
         +clear()
     }
@@ -116,14 +116,14 @@ classDiagram
     Topping <|.. PremiumTopping
     Topping <|.. IncludedTopping
 
-    OrderableItem <|.. Sandwich
-    OrderableItem <|.. Chip
-    OrderableItem <|.. Drink
+    MenuItem <|.. Sandwich
+    MenuItem <|.. Chip
+    MenuItem <|.. Drink
 
     Sandwich <|.. SignatureSandwich
     SignatureSandwichLoader --> SignatureSandwich : creates
     Sandwich o-- Topping
-    Order o-- OrderableItem
+    Order o-- MenuItem
 
     Screen <|.. HomeScreen
     Screen <|.. OrderScreen
