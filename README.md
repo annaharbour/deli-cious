@@ -28,7 +28,8 @@ classDiagram
 
     class ScreenState {
         <<interface>>
-        +void run()
+        +void display()
+        +void handleInput()
     }
 
     class ReceiptWriter {
@@ -44,11 +45,11 @@ classDiagram
         -List~Topping~ toppings
         -List~Sauce~ sauces
         -List~Sides~ sides
-        +removeTopping(topping)
-        +removeSauce(sauce)
-        +removeSide(side)
-        +addTopping(Topping)
-        +addSauce(SauceType)
+        +void removeTopping(topping)
+        +void removeSauce(sauce)
+        +void removeSide(side)
+        +void addTopping(Topping)
+        +void addSauce(SauceType)
         +SandwichSize[] getAllSizeOptions()
     }
 
@@ -82,7 +83,7 @@ classDiagram
     }
 
     class Sauce {
-        -SauceType type
+        -SauceType sauceType
     }
     
     class Side {
@@ -108,7 +109,7 @@ classDiagram
         -Customer customer
         -LocalDateTime timeStamp
         -List~MenuItem~ orderItems
-        +addItem(MenuItem)
+        +void addItem(MenuItem)
         +double getTotalPrice()
         +clear()
     }
