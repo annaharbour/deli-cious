@@ -142,6 +142,7 @@ classDiagram
     Sandwich o-- Sauce
     Sandwich o-- Side
 
+    Customer o-- Order
     Order o-- MenuItem
 
     ScreenState <|.. HomeScreen
